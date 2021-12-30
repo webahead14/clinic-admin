@@ -56,7 +56,7 @@ function SurveyList(props) {
     <div
       style={{
         display: "block",
-        width: 1600,
+        width: '100%',
       }}
     >
       <h1 style={{ textAlign: "center", paddingBottom: 40, fontSize: 40 }}>
