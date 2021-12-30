@@ -1,32 +1,34 @@
-import './App.css';
-import { useEffect, useState } from 'react'
+import "./App.css";
+import { useEffect, useState } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import axios from 'axios'
-import { Layout, Menu } from 'antd'
+import axios from "axios";
+import { Layout, Menu } from "antd";
 import {
   ApartmentOutlined,
   TeamOutlined,
   FileOutlined,
   UserOutlined,
-} from '@ant-design/icons'
+} from "@ant-design/icons";
 
-import Login from './pages/Login'
-import Home from './pages/Home'
-import ClientList from './pages/ClientList'
-import ProtocolList from './pages/ProtocolList'
-import SurveyList from './pages/SurveyList'
-import AddClient from './pages/AddClient'
-import AddProtocol from './pages/AddProtocol'
-import ClientPage from './pages/ClientPage'
-import ProtocolPage from './pages/ProtocolPage'
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import ClientList from "./pages/ClientList";
+import ProtocolList from "./pages/ProtocolList";
+import SurveyList from "./pages/SurveyList";
+import AddClient from "./pages/AddClient";
+import AddProtocol from "./pages/AddProtocol";
+import TwoAddProtocol from "./pages/TwoAddProtocol";
 
-const { Header, Content, Footer, Sider } = Layout
-const { SubMenu } = Menu
+import ClientPage from "./pages/ClientPage";
+import ProtocolPage from "./pages/ProtocolPage";
+
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
 
 function App() {
   const location = useLocation();
-  const navigate = useNavigate()
-  const [collapse, setCollapse] = useState(false)
+  const navigate = useNavigate();
+  const [collapse, setCollapse] = useState(false);
 
   // Just an axios example
   // useEffect(() => {
@@ -40,21 +42,21 @@ function App() {
   //     .then((res) => {
   //       res.data
   //     })
-  //     .catch() 
+  //     .catch()
   // }, [])
-
 
   if (location.pathname === "/login") {
     return <Login />;
   }
-
 
   // To change the color of the dark mode refer to the craco.config.js file
   return (
     <Layout dir="ltr">
       <Header className="header">
         <div>
-          <h2 style={{ color: 'white', margin: '0 10px 0 -30px' }}>Clinic admin</h2>
+          <h2 style={{ color: "white", margin: "0 10px 0 -30px" }}>
+            Clinic admin
+          </h2>
         </div>
         {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
         <Menu.Item key="1">Tab 1</Menu.Item>
@@ -62,17 +64,30 @@ function App() {
         <Menu.Item key="3">Tab 3</Menu.Item>
       </Menu> */}
       </Header>
-      <Layout className="site-layout" style={{ minHeight: '90vh' }}>
+      <Layout className="site-layout" style={{ minHeight: "90vh" }}>
         {/* <Header className="site-layout-background" style={{ padding: 0 }} /> */}
         <Sider collapsible collapsed={collapse} onCollapse={setCollapse}>
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1" onClick={() => navigate('/clients')} icon={<TeamOutlined />} style={{ marginTop: 0 }}>
+          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+            <Menu.Item
+              key="1"
+              onClick={() => navigate("/clients")}
+              icon={<TeamOutlined />}
+              style={{ marginTop: 0 }}
+            >
               Client list
             </Menu.Item>
-            <Menu.Item key="2" onClick={() => navigate('/protocols')} icon={<ApartmentOutlined />}>
+            <Menu.Item
+              key="2"
+              onClick={() => navigate("/protocols")}
+              icon={<ApartmentOutlined />}
+            >
               Protocol list
             </Menu.Item>
-            <Menu.Item key="3" onClick={() => navigate('/surveys')} icon={<FileOutlined />}>
+            <Menu.Item
+              key="3"
+              onClick={() => navigate("/surveys")}
+              icon={<FileOutlined />}
+            >
               Survey list
             </Menu.Item>
             <SubMenu key="sub1" icon={<UserOutlined />} title="User">
@@ -85,13 +100,14 @@ function App() {
             </SubMenu>
           </Menu>
         </Sider>
-        <Content style={{ margin: '0 16px' }}>
+        <Content style={{ margin: "0 16px" }}>
           <div style={{ padding: 24, minHeight: 360 }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/clients" element={<ClientList />} />
               <Route path="/surveys" element={<SurveyList />} />
               <Route path="/protocols" element={<ProtocolList />} />
+              <Route path="/add/twoprotocol" element={<TwoAddProtocol />} />
               <Route path="/add/protocol" element={<AddProtocol />} />
               <Route path="/add/client" element={<AddClient />} />
               <Route path="/client/:id" element={<ClientPage />} />
@@ -101,7 +117,7 @@ function App() {
         </Content>
       </Layout>
     </Layout>
-  )
+  );
 }
 
 export default App;

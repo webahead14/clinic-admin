@@ -1,0 +1,55 @@
+.addProtocol {
+}
+
+.addProtocolTitle {
+  font-size: 40px;
+  text-align: center;
+}
+
+.allDropdowns {
+  display: flex;
+  justify-content: center;
+}
+
+.protocolName {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.surveyName {
+  margin-left: 10px;
+  font: 10px;
+}
+
+.surveyPicker {
+  /* display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row; */
+}
+
+table {
+  display: flex;
+  position: relative;
+  justify-content: left;
+}
+
+.weekday {
+  width: 70px;
+  margin-right: 5px;
+}
+
+.weekNum {
+  width: 60px;
+  margin-left: 10px;
+}
+
+.surveySpan {
+  display: inline-block;
+  width: 50px;
+}
+
+.checkboxes {
+  margin-right: 5px;
+}
