@@ -30,6 +30,11 @@ const dataSource = [
 
 const columns = [
   {
+    title: "id",
+    dataIndex: "id",
+    key: "id",
+  },
+  {
     title: "Name",
     dataIndex: "name",
     key: "name",
@@ -51,11 +56,12 @@ function SurveyList(props) {
     <div
       style={{
         display: "block",
-        width: 700,
-        padding: 30,
+        width: 1600,
       }}
     >
-      <h1>Survey List</h1>
+      <h1 style={{ textAlign: "center", paddingBottom: 40, fontSize: 40 }}>
+        Survey List
+      </h1>
       <Table dataSource={dataSource} columns={columns} />;
     </div>
   );
