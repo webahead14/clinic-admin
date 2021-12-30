@@ -27,7 +27,23 @@ function TwoAddProtocol(props) {
   return (
     <div className={style.secondProtocol}>
       <div className={style.addProtocolTitle}>
-        <h1>Second Protocol Page</h1>
+        <h1>Add a Protocol</h1>
+      </div>
+      <div className={style.protocolName}>
+        <label htmlFor="protocolName" className={style.protocolName}>
+          Protocol Name:
+        </label>
+        <br />
+
+        <input
+          id="protocolName"
+          type="text"
+          className={style.protocolName}
+          placeholder="Protocol..."
+          onChange={onChange("protocolName")}
+          value={protocolData.name}
+          required
+        />
       </div>
       <div className={style.cardContainer}>
         {surveys.map((survey) => (
@@ -96,6 +112,7 @@ function TwoAddProtocol(props) {
           </Card>
         ))}
       </div>
+      <hr />
     </div>
   );
 }

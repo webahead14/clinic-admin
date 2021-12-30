@@ -1,3 +1,15 @@
+.cardContainer {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.protocolName {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 22px;}
+
 .add {
   display: flex;
   position: absolute;
