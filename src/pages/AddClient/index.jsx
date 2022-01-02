@@ -1,11 +1,13 @@
 import style from "./style.module.css";
 import React, { useState } from "react";
 import Complete from "../../Complete";
+
 import {
   Form,
   Input,
   Radio,
   DatePicker,
+  TimePicker,
   InputNumber,
   Cascader,
   Select,
@@ -57,6 +59,7 @@ function AddClient(props) {
           {" "}
           <Input />
         </Form.Item>
+
         <Form.Item
           label="Email"
           name="email"
@@ -64,6 +67,15 @@ function AddClient(props) {
         >
           <Input />
         </Form.Item>
+
+        <Form.Item
+          label="Passcode"
+          name="password"
+          rules={[{ required: true, message: "Please choose a password!" }]}
+        >
+          <Input.Password />
+        </Form.Item>
+
         <Form.Item
           name="Phone"
           label="Phone Number"
@@ -108,12 +120,8 @@ function AddClient(props) {
           <Complete />
         </Form.Item>
 
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: "Please choose a password!" }]}
-        >
-          <Input.Password />
+        <Form.Item name="reminder" label="Reminder">
+          <TimePicker /> <TimePicker /> <TimePicker />
         </Form.Item>
 
         <Form.Item>
