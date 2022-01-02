@@ -16,3 +16,7 @@
   margin-top: 10px;
   width: 150px;
 }
+
+.ant-picker-input-placeholder {
+  width: 50px;
+}

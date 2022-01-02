@@ -1,29 +1,30 @@
 import style from "./style.module.css";
 import "./style.css";
-import { Collapse, TimePicker } from "antd";
+import { Collapse, TimePicker, DatePicker } from "antd";
 import moment from "moment";
 import { useState, useEffect } from "react";
 
 function TwoAddProtocol(props) {
+  const [addWeek, setAddWeek] = useState(['Add a Week']);
   const [protocolData, setProtocolData] = useState({
     protocolName: "",
     week: "",
     weekday: "",
+    surveyDate: "",
     time: "",
   });
   const [checked, setChecked] = useState([false]);
-  //import DatePicker from "antd" if you want to use it
-  // const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
   const handleChange = () => {
     setChecked(!checked);
   };
-
+  
   const onChange =
     (stateKey) =>
     ({ target }) =>
-      setProtocolData({ ...protocolData, [stateKey]: target.value });
-  const { Panel } = Collapse;
-  const format = "HH:mm";
+    setProtocolData({ ...protocolData, [stateKey]: target.value });
+    const { Panel } = Collapse;
+    const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
+    const format = "HH:mm";
 
   return (
     <div className={style.addProtocol}>
@@ -48,7 +49,9 @@ function TwoAddProtocol(props) {
 
       <div className={style.allDropdowns}>
         <Collapse>
+        {addWeek.map((week) => 
           <Panel header="Week 1" key="1">
+            {week}
             <div className={style.timetable}>
               <label className={style.surveyPicker}>
                 <input
@@ -59,24 +62,10 @@ function TwoAddProtocol(props) {
                 />
               </label>
               <span className={style.surveySpan}> PCL</span>
-              <input
-                id="weekNum"
-                type="num"
-                className={style.weekNum}
-                placeholder="Week #"
-                onChange={onChange("weekNum")}
-                value={protocolData.week}
-                required
-              />
-              <input
-                id="weekday"
-                type="text"
-                className={style.weekday}
-                placeholder="Weekday..."
-                onChange={onChange("weekday")}
-                value={protocolData.weekday}
-                required
-              />
+              <DatePicker className={style.surveyDate}
+              value={protocolData.surveyDate}
+              required
+              onChange={onChange} />
               <TimePicker
                 className={style.surveyTime}
                 value={protocolData.time}
@@ -104,7 +93,7 @@ function TwoAddProtocol(props) {
                 onChange={onChange("weekNum")}
                 value={protocolData.week}
                 required
-              />{" "}
+                />{" "}
               <input
                 id="weekday"
                 type="text"
@@ -113,7 +102,7 @@ function TwoAddProtocol(props) {
                 onChange={onChange("weekday")}
                 value={protocolData.weekday}
                 required
-              />
+                />
               <TimePicker
                 className={style.surveyTime}
                 value={protocolData.time}
@@ -121,7 +110,7 @@ function TwoAddProtocol(props) {
                 onChange={onChange("surveyTime")}
                 defaultValue={moment("12:08", format)}
                 format={format}
-              />
+                />
             </div>
             <div className={style.timetable}>
               <label className={style.surveyPicker}>
@@ -130,7 +119,7 @@ function TwoAddProtocol(props) {
                   type="checkbox"
                   checked={checked}
                   onChange={handleChange}
-                />
+                  />
               </label>
               <span className={style.surveySpan}> PHQ</span>
               <input
@@ -141,7 +130,7 @@ function TwoAddProtocol(props) {
                 onChange={onChange("weekNum")}
                 value={protocolData.week}
                 required
-              />{" "}
+                />{" "}
               <input
                 id="weekday"
                 type="text"
@@ -150,7 +139,7 @@ function TwoAddProtocol(props) {
                 onChange={onChange("weekday")}
                 value={protocolData.weekday}
                 required
-              />
+                />
               <TimePicker
                 className={style.surveyTime}
                 value={protocolData.time}
@@ -158,7 +147,7 @@ function TwoAddProtocol(props) {
                 onChange={onChange("surveyTime")}
                 defaultValue={moment("12:08", format)}
                 format={format}
-              />
+                />
             </div>
             <div className={style.timetable}>
               <label className={style.surveyPicker}>
@@ -167,7 +156,7 @@ function TwoAddProtocol(props) {
                   type="checkbox"
                   checked={checked}
                   onChange={handleChange}
-                />
+                  />
               </label>
               <span className={style.surveySpan}> TAS</span>
               <input
@@ -178,7 +167,7 @@ function TwoAddProtocol(props) {
                 onChange={onChange("weekNum")}
                 value={protocolData.week}
                 required
-              />{" "}
+                />{" "}
               <input
                 id="weekday"
                 type="text"
@@ -187,7 +176,7 @@ function TwoAddProtocol(props) {
                 onChange={onChange("weekday")}
                 value={protocolData.weekday}
                 required
-              />
+                />
               <TimePicker
                 className={style.surveyTime}
                 value={protocolData.time}
@@ -195,7 +184,7 @@ function TwoAddProtocol(props) {
                 onChange={onChange("surveyTime")}
                 defaultValue={moment("12:08", format)}
                 format={format}
-              />
+                />
             </div>
             <div className={style.timetable}>
               <label className={style.surveyPicker}>
@@ -204,8 +193,9 @@ function TwoAddProtocol(props) {
                   type="checkbox"
                   checked={checked}
                   onChange={handleChange}
-                />
+                  />
               </label>
+              
               <span className={style.surveySpan}> PGI-S</span>
               <input
                 id="weekNum"
@@ -215,7 +205,7 @@ function TwoAddProtocol(props) {
                 onChange={onChange("weekNum")}
                 value={protocolData.week}
                 required
-              />{" "}
+                />{" "}
               <input
                 id="weekday"
                 type="text"
@@ -224,7 +214,7 @@ function TwoAddProtocol(props) {
                 onChange={onChange("weekday")}
                 value={protocolData.weekday}
                 required
-              />
+                />
               <TimePicker
                 className={style.surveyTime}
                 value={protocolData.time}
@@ -232,18 +222,24 @@ function TwoAddProtocol(props) {
                 onChange={onChange("surveyTime")}
                 defaultValue={moment("12:08", format)}
                 format={format}
-              />
+                />
             </div>
           </Panel>
+            )}
           <Panel header="Week 2" key="2"></Panel>
           <Panel header="Week 3" key="3"></Panel>
           <Panel header="Week 4" key="4"></Panel>
           <Panel header="Week 5" key="5"></Panel>
           <Panel header="Week 6" key="6"></Panel>
           <Panel header="Week 7" key="7"></Panel>
+          
           <Panel header="Week 8" key="8"></Panel>
+        
         </Collapse>
       </div>
+      <button className={style.addWeek} onClock={() => setAddWeek(addWeek.concat("Add a week"))}>
+        + Add a week
+      </button>
     </div>
   );
 }
