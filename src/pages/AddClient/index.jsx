@@ -83,7 +83,7 @@ function AddClient(props) {
         <Form.Item
           name="gender"
           label="Gender"
-          rules={[{ required: true, message: "Please select gender!" }]}
+          rules={[{ required: true, message: "Please select a gender!" }]}
         >
           <Radio.Group name="radiogroup" defaultValue={1}>
             <Radio value={1}>Male</Radio>
@@ -92,12 +92,30 @@ function AddClient(props) {
           </Radio.Group>
         </Form.Item>
 
-        <Form.Item label="Start Date">
+        <Form.Item
+          name="Date"
+          label="Start Date"
+          rules={[{ required: true, message: "Please choose a date!" }]}
+        >
           <DatePicker />
         </Form.Item>
-        <Form.Item label="Choose a protocol">
+
+        <Form.Item
+          name="protocol"
+          label="Choose a protocol"
+          rules={[{ required: true, message: "Please choose a protocol!" }]}
+        >
           <Complete />
         </Form.Item>
+
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: "Please choose a password!" }]}
+        >
+          <Input.Password />
+        </Form.Item>
+
         <Form.Item>
           <Button type="success" htmlType="submit">
             Add
