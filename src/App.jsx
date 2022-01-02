@@ -51,7 +51,7 @@ function App() {
 
   // To change the color of the dark mode refer to the craco.config.js file
   return (
-    <Layout dir="ltr">
+    <Layout dir="ltr" style={{ height: '100vh' }}>
       <Header className="header">
         <div>
           <h2 style={{ color: 'white', margin: '0 10px 0 -30px' }}>Clinic admin</h2>

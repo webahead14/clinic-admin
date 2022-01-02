@@ -8,14 +8,8 @@ import {
   Radio,
   DatePicker,
   TimePicker,
-  InputNumber,
-  Cascader,
   Select,
-  Row,
-  Col,
-  Checkbox,
   Button,
-  AutoComplete,
 } from "antd";
 
 const { Option } = Select;
@@ -29,11 +23,6 @@ const prefixSelector = (
   </Form.Item>
 );
 
-const radioStyle = {
-  display: "block",
-  "margin-bottom": "5px",
-  "border-radius": "3px",
-};
 
 function AddClient(props) {
   return (
