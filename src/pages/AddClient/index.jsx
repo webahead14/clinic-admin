@@ -1,11 +1,111 @@
-import style from './style.module.css'
+import style from "./style.module.css";
+import React, { useState } from "react";
+import Complete from "../../Complete";
+import {
+  Form,
+  Input,
+  Radio,
+  DatePicker,
+  InputNumber,
+  Cascader,
+  Select,
+  Row,
+  Col,
+  Checkbox,
+  Button,
+  AutoComplete,
+} from "antd";
+
+const { Option } = Select;
+
+const prefixSelector = (
+  <Form.Item name="prefix" noStyle>
+    <Select style={{ width: 70 }}>
+      <Option value="972">+972</Option>
+      {/* <Option value=""></Option> */}
+    </Select>
+  </Form.Item>
+);
+
+const radioStyle = {
+  display: "block",
+  "margin-bottom": "5px",
+  "border-radius": "3px",
+};
 
 function AddClient(props) {
-    return (
-        <div>
-            <h1>AddClient</h1>
-        </div>
-    )
+  return (
+    <div
+      style={{
+        display: "block",
+        width: 700,
+        padding: 30,
+      }}
+    >
+      <h4>Add a client</h4>
+      <Form
+        name="basicform"
+        onFinishFailed={() => alert("Failed to submit")}
+        onFinish={() => alert("Form Submitted")}
+        initialValues={{ remember: true }}
+      >
+        <Form.Item
+          label="Name"
+          name="name"
+          rules={[{ required: true, message: "Please enter a name" }]}
+        >
+          {" "}
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[{ required: true, message: "Please enter an email" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="Phone"
+          label="Phone Number"
+          rules={[{ required: true, message: "Please insert a phone number!" }]}
+        >
+          <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
+        </Form.Item>
+
+        <Form.Item
+          label="Condition"
+          name="condition"
+          rules={[{ required: true, message: "Please enter a condition" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          name="gender"
+          label="Gender"
+          rules={[{ required: true, message: "Please select gender!" }]}
+        >
+          <Radio.Group name="radiogroup" defaultValue={1}>
+            <Radio value={1}>Male</Radio>
+            <Radio value={2}>Female</Radio>
+            <Radio value={3}>Other</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <Form.Item label="Start Date">
+          <DatePicker />
+        </Form.Item>
+        <Form.Item label="Choose a protocol">
+          <Complete />
+        </Form.Item>
+        <Form.Item>
+          <Button type="success" htmlType="submit">
+            Add
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
 }
 
-export default AddClient
+export default AddClient;
