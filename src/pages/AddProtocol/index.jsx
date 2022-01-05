@@ -4,6 +4,7 @@ import { Collapse, Select } from "antd";
 import { useState } from "react";
 import Complete from "../../Complete";
 import { useNavigate } from "react-router-dom";
+import options from "../../utils/allSurveys";
 
 function AddProtocol(props) {
   const [addWeek, setAddWeek] = useState([{ week: 1, surveys: [] }]);
@@ -16,8 +17,8 @@ function AddProtocol(props) {
 
   const { Option } = Select;
 
+  //filtering for whatever survey is selected and indicating which week it's in
   function handleChange(value) {
-    console.log("hi");
     filteredWeek = [];
     setHighlighted([]);
     addWeek.forEach((week, index) => {
@@ -28,16 +29,13 @@ function AddProtocol(props) {
     });
   }
 
+  //Protocol name input
   const onChange =
     (stateKey) =>
     ({ target }) =>
       setProtocolData({ ...protocolData, [stateKey]: target.value });
 
   const { Panel } = Collapse;
-
-  // const updateSurvey = (newAddWeek) => {
-  //   setAddWeek([...newAddWeek]);
-  // };
 
   const goTo = useNavigate();
 
@@ -73,32 +71,34 @@ function AddProtocol(props) {
             style={{ width: 120 }}
             onChange={handleChange}
             allowClear
-          >
-            <Option value="PCL-5">PCL</Option>
-            <Option value="GAD">GAD</Option>
-            <Option value="PHQ">PHQ</Option>
-            <Option value="PGI-S">PGI-S</Option>
-          </Select>
+            options={options}
+            filterOption={(inputValue, option) =>
+              option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
+              -1
+            }
+          ></Select>
         </div>
         <Collapse>
           {addWeek.map((obj, index) => (
             <Panel
+              // highlights week
               style={
                 highlighted.includes(obj.week)
                   ? { backgroundColor: " #a5c0d1 " }
                   : {}
               }
+              //adds sequential week number to panel header
               header={"Week " + obj.week}
               key={obj.week}
             >
               <h3>Choose Surveys</h3>
+              {/* retrieves autocomplete data from Complete component */}
               <Complete
                 panels={addWeek}
                 surveys={addWeek[obj.week - 1].surveys}
                 id={obj.week}
                 setAddWeek={setAddWeek}
               />
-              {/* on survey select, take setAddWeek, give function that calls addweek to add surveys */}
               {obj.surveys.map((survey, idx) => {
                 return (
                   <div className={style.surveyBox}>

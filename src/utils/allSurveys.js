@@ -15,5 +15,13 @@ const options = [
     id: 4,
     value: "PGI-S",
   },
+  {
+    id: 5,
+    value: "PGI-A",
+  },
+  {
+    id: 6,
+    value: "PGI-T",
+  },
 ];
 export default options;
