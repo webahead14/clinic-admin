@@ -1,81 +1,53 @@
-import style from "./style.module.css";
-import { Table } from "antd";
-
-const dataSource = [
-  {
-    id: 1,
-    name: "PCL-5",
-    surveysAmount: 5,
-    date: "16-01-2021",
-    condition: "PTSD",
-  },
-  {
-    id: 2,
-    name: "GAD",
-    surveysAmount: 20,
-    date: "01-06-2021",
-    condition: "Anxiety",
-  },
-  {
-    id: 3,
-    name: "PST-420-BLAZEIT",
-    surveysAmount: 200,
-    date: "01-01-2022",
-    condition: "Stoner",
-  },
-  {
-    id: 4,
-    name: "THC",
-    surveysAmount: 55,
-    date: "01-01-2022",
-    condition: "Hala",
-  },
-];
+import style from './style.module.css'
+import { Table } from 'antd'
+import { useEffect, useState } from 'react'
+import { getProtocolsList } from '../../utils/api'
 
 const columns = [
   {
-    title: "id",
-    dataIndex: "id",
-    key: "id",
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
   },
   {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
   },
   {
-    title: "surveysAmount",
-    dataIndex: "surveysAmount",
-    key: "surveysAmount",
+    title: 'Surveys Amount',
+    dataIndex: 'surveysAmount',
+    key: 'surveysAmount',
   },
   {
-    title: "date",
-    dataIndex: "date",
-    key: "date",
+    title: 'Date',
+    dataIndex: 'date',
+    key: 'date',
   },
   {
-    title: "condition",
-    dataIndex: "condition",
-    key: "condition",
+    title: 'Condition',
+    dataIndex: 'condition',
+    key: 'condition',
   },
-];
+]
 
-function ProtocolList(props) {
+function ProtocolList() {
+  const [protocolList, setProtocolList] = useState([])
+  useEffect(() => {
+    getProtocolsList().then((protocols) => setProtocolList(protocols))
+  }, [])
+
   return (
-    <div>
-      <div
-        style={{
-          display: "block",
-          width: '100%',
-        }}
-      >
-        <h1 style={{ textAlign: "center", paddingBottom: 40, fontSize: 40 }}>
-          Protocol list
-        </h1>
-        <Table dataSource={dataSource} columns={columns} />;
-      </div>
+    <div className={style.protocolList}>
+      <h1 className={style.title}>Protocol list</h1>
+      <Table
+        dataSource={protocolList}
+        columns={columns}
+        // pagination={{ pageSize: 5 }}
+      />
+      ;
     </div>
-  );
+  )
 }
 
-export default ProtocolList;
+export default ProtocolList
