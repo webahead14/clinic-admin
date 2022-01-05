@@ -1,3 +1,7 @@
 .ant-collapse {
   width: 500px;
 }
+
+.ant-collapse-header {
+  cursor: default;
+}

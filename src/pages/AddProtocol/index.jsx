@@ -1,31 +1,50 @@
 import style from "./style.module.css";
 import "./style.css";
-import { Collapse, TimePicker, DatePicker } from "antd";
-import moment from "moment";
-import { useState, useEffect } from "react";
+import { Collapse, Select } from "antd";
+import { useState } from "react";
+import Complete from "../../Complete";
+import { useNavigate } from "react-router-dom";
 
-function TwoAddProtocol(props) {
-  const [addWeek, setAddWeek] = useState(['Add a Week']);
+function AddProtocol(props) {
+  const [addWeek, setAddWeek] = useState([{ week: 1, surveys: [] }]);
   const [protocolData, setProtocolData] = useState({
     protocolName: "",
-    week: "",
-    weekday: "",
-    surveyDate: "",
-    time: "",
   });
-  const [checked, setChecked] = useState([false]);
-  const handleChange = () => {
-    setChecked(!checked);
-  };
-  
+
+  let filteredWeek = [];
+  const [highlighted, setHighlighted] = useState([]);
+
+  const { Option } = Select;
+
+  function handleChange(value) {
+    console.log("hi");
+    filteredWeek = [];
+    setHighlighted([]);
+    addWeek.forEach((week, index) => {
+      if (week.surveys.find((element) => element === value)) {
+        filteredWeek.push(week.week);
+        setHighlighted([...filteredWeek]);
+      }
+    });
+  }
+
   const onChange =
     (stateKey) =>
     ({ target }) =>
-    setProtocolData({ ...protocolData, [stateKey]: target.value });
-    const { Panel } = Collapse;
-    const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
-    const format = "HH:mm";
+      setProtocolData({ ...protocolData, [stateKey]: target.value });
 
+  const { Panel } = Collapse;
+
+  // const updateSurvey = (newAddWeek) => {
+  //   setAddWeek([...newAddWeek]);
+  // };
+
+  const goTo = useNavigate();
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    goTo("/");
+  };
   return (
     <div className={style.addProtocol}>
       <div className={style.addProtocolTitle}>
@@ -48,200 +67,105 @@ function TwoAddProtocol(props) {
       </div>
 
       <div className={style.allDropdowns}>
+        <div className={style.filterSurvey}>
+          <Select
+            defaultValue="Filter Survey"
+            style={{ width: 120 }}
+            onChange={handleChange}
+            allowClear
+          >
+            <Option value="PCL-5">PCL</Option>
+            <Option value="GAD">GAD</Option>
+            <Option value="PHQ">PHQ</Option>
+            <Option value="PGI-S">PGI-S</Option>
+          </Select>
+        </div>
         <Collapse>
-        {addWeek.map((week) => 
-          <Panel header="Week 1" key="1">
-            {week}
-            <div className={style.timetable}>
-              <label className={style.surveyPicker}>
-                <input
-                  className={style.checkboxes}
-                  type="checkbox"
-                  checked={checked}
-                  onChange={handleChange}
-                />
-              </label>
-              <span className={style.surveySpan}> PCL</span>
-              <DatePicker className={style.surveyDate}
-              value={protocolData.surveyDate}
-              required
-              onChange={onChange} />
-              <TimePicker
-                className={style.surveyTime}
-                value={protocolData.time}
-                required
-                onChange={onChange("surveyTime")}
-                defaultValue={moment("12:08", format)}
-                format={format}
+          {addWeek.map((obj, index) => (
+            <Panel
+              style={
+                highlighted.includes(obj.week)
+                  ? { backgroundColor: " #a5c0d1 " }
+                  : {}
+              }
+              header={"Week " + obj.week}
+              key={obj.week}
+            >
+              <h3>Choose Surveys</h3>
+              <Complete
+                panels={addWeek}
+                surveys={addWeek[obj.week - 1].surveys}
+                id={obj.week}
+                setAddWeek={setAddWeek}
               />
-            </div>
-            <div className={style.timetable}>
-              <label className={style.surveyPicker}>
-                <input
-                  className={style.checkboxes}
-                  type="checkbox"
-                  checked={checked}
-                  onChange={handleChange}
-                />
-              </label>
-              <span className={style.surveySpan}> GAD</span>
-              <input
-                id="weekNum"
-                type="num"
-                className={style.weekNum}
-                placeholder="Week #"
-                onChange={onChange("weekNum")}
-                value={protocolData.week}
-                required
-                />{" "}
-              <input
-                id="weekday"
-                type="text"
-                className={style.weekday}
-                placeholder="Weekday..."
-                onChange={onChange("weekday")}
-                value={protocolData.weekday}
-                required
-                />
-              <TimePicker
-                className={style.surveyTime}
-                value={protocolData.time}
-                required
-                onChange={onChange("surveyTime")}
-                defaultValue={moment("12:08", format)}
-                format={format}
-                />
-            </div>
-            <div className={style.timetable}>
-              <label className={style.surveyPicker}>
-                <input
-                  className={style.checkboxes}
-                  type="checkbox"
-                  checked={checked}
-                  onChange={handleChange}
-                  />
-              </label>
-              <span className={style.surveySpan}> PHQ</span>
-              <input
-                id="weekNum"
-                type="num"
-                className={style.weekNum}
-                placeholder="Week #"
-                onChange={onChange("weekNum")}
-                value={protocolData.week}
-                required
-                />{" "}
-              <input
-                id="weekday"
-                type="text"
-                className={style.weekday}
-                placeholder="Weekday..."
-                onChange={onChange("weekday")}
-                value={protocolData.weekday}
-                required
-                />
-              <TimePicker
-                className={style.surveyTime}
-                value={protocolData.time}
-                required
-                onChange={onChange("surveyTime")}
-                defaultValue={moment("12:08", format)}
-                format={format}
-                />
-            </div>
-            <div className={style.timetable}>
-              <label className={style.surveyPicker}>
-                <input
-                  className={style.checkboxes}
-                  type="checkbox"
-                  checked={checked}
-                  onChange={handleChange}
-                  />
-              </label>
-              <span className={style.surveySpan}> TAS</span>
-              <input
-                id="weekNum"
-                type="num"
-                className={style.weekNum}
-                placeholder="Week #"
-                onChange={onChange("weekNum")}
-                value={protocolData.week}
-                required
-                />{" "}
-              <input
-                id="weekday"
-                type="text"
-                className={style.weekday}
-                placeholder="Weekday..."
-                onChange={onChange("weekday")}
-                value={protocolData.weekday}
-                required
-                />
-              <TimePicker
-                className={style.surveyTime}
-                value={protocolData.time}
-                required
-                onChange={onChange("surveyTime")}
-                defaultValue={moment("12:08", format)}
-                format={format}
-                />
-            </div>
-            <div className={style.timetable}>
-              <label className={style.surveyPicker}>
-                <input
-                  className={style.checkboxes}
-                  type="checkbox"
-                  checked={checked}
-                  onChange={handleChange}
-                  />
-              </label>
-              
-              <span className={style.surveySpan}> PGI-S</span>
-              <input
-                id="weekNum"
-                type="num"
-                className={style.weekNum}
-                placeholder="Week #"
-                onChange={onChange("weekNum")}
-                value={protocolData.week}
-                required
-                />{" "}
-              <input
-                id="weekday"
-                type="text"
-                className={style.weekday}
-                placeholder="Weekday..."
-                onChange={onChange("weekday")}
-                value={protocolData.weekday}
-                required
-                />
-              <TimePicker
-                className={style.surveyTime}
-                value={protocolData.time}
-                required
-                onChange={onChange("surveyTime")}
-                defaultValue={moment("12:08", format)}
-                format={format}
-                />
-            </div>
-          </Panel>
-            )}
-          <Panel header="Week 2" key="2"></Panel>
-          <Panel header="Week 3" key="3"></Panel>
-          <Panel header="Week 4" key="4"></Panel>
-          <Panel header="Week 5" key="5"></Panel>
-          <Panel header="Week 6" key="6"></Panel>
-          <Panel header="Week 7" key="7"></Panel>
-          
-          <Panel header="Week 8" key="8"></Panel>
-        
+              {/* on survey select, take setAddWeek, give function that calls addweek to add surveys */}
+              {obj.surveys.map((survey, idx) => {
+                return (
+                  <div className={style.surveyBox}>
+                    <p
+                      className={style.deleteSurvey}
+                      onClick={(e) => {
+                        setAddWeek((prevArr) => {
+                          let temp = [...prevArr];
+                          let result = temp[obj.week - 1].surveys.filter(
+                            (element) => {
+                              return element !== survey;
+                            }
+                          );
+                          temp[obj.week - 1].surveys = [...result];
+                          return temp;
+                        });
+                        console.log(survey);
+                      }}
+                    >
+                      X
+                    </p>
+                    <h3
+                      className={style.surveySelection}
+                      key={idx}
+                      value="Search"
+                    >
+                      {survey}
+                    </h3>
+                  </div>
+                );
+              })}
+              {index === addWeek.length - 1 ? (
+                <button
+                  className={style.deleteWeek}
+                  onClick={() => {
+                    setAddWeek((prevArr) => {
+                      return prevArr.filter(
+                        (week, index) => index < addWeek.length - 1
+                      );
+                    });
+                  }}
+                >
+                  Delete Week
+                </button>
+              ) : null}
+            </Panel>
+          ))}
         </Collapse>
+        <div className={style.addWeekBtn}></div>
+        <button
+          className={style.addWeek}
+          onClick={() => {
+            const lastWeek = addWeek[addWeek.length - 1];
+            setAddWeek(
+              addWeek.concat({ week: lastWeek.week + 1, surveys: [] })
+            );
+          }}
+        >
+          + Add a week
+        </button>
+
+        <button className={style.submitProtocol} onClick={onSubmit}>
+          Submit
+        </button>
       </div>
-      <button className={style.addWeek} onClock={() => setAddWeek(addWeek.concat("Add a week"))}>
-        + Add a week
-      </button>
     </div>
   );
 }
 
-export default TwoAddProtocol;
+export default AddProtocol;

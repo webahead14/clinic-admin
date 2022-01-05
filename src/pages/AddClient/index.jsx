@@ -1,11 +1,11 @@
-import style from './style.module.css'
-
+import style from "./style.module.css";
+import Complete from "../../Complete";
 function AddClient(props) {
-    return (
-        <div>
-            <h1>AddClient</h1>
-        </div>
-    )
+  return (
+    <div>
+      <h1>AddClient</h1>
+    </div>
+  );
 }
 
-export default AddClient
+export default AddClient;

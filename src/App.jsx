@@ -107,7 +107,7 @@ function App() {
               <Route path="/clients" element={<ClientList />} />
               <Route path="/surveys" element={<SurveyList />} />
               <Route path="/protocols" element={<ProtocolList />} />
-              <Route path="/add/twoprotocol" element={<TwoAddProtocol />} />
+              {/* <Route path="/add/twoprotocol" element={<TwoAddProtocol />} /> */}
               <Route path="/add/protocol" element={<AddProtocol />} />
               <Route path="/add/client" element={<AddClient />} />
               <Route path="/client/:id" element={<ClientPage />} />
