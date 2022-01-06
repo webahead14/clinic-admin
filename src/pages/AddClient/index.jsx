@@ -1,5 +1,4 @@
 import style from "./style.module.css";
-import Complete from "../../Complete";
 function AddClient(props) {
   return (
     <div>
