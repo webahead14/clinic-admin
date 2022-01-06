@@ -1,11 +1,71 @@
-import style from './style.module.css'
+import style from "./style.module.css";
+import { Table } from "antd";
+
+const dataSource = [
+  {
+    id: 1,
+    name: "PCL-5",
+    questionsAmount: 5,
+    date: "16-01-2021",
+  },
+  {
+    id: 2,
+    name: "GAD",
+    questionsAmount: 20,
+    date: "01-06-2021",
+  },
+  {
+    id: 3,
+    name: "PST-420-BLAZEIT",
+    questionsAmount: 200,
+    date: "01-01-2022",
+  },
+  {
+    id: 4,
+    name: "THC",
+    questionsAmount: 55,
+    date: "01-01-2022",
+  },
+];
+
+const columns = [
+  {
+    title: "id",
+    dataIndex: "id",
+    key: "id",
+  },
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "questionsAmount",
+    dataIndex: "questionsAmount",
+    key: "questionsAmount",
+  },
+  {
+    title: "date",
+    dataIndex: "date",
+    key: "date",
+  },
+];
 
 function SurveyList(props) {
-    return (
-        <div>
-            <h1>SurveyList</h1>
-        </div>
-    )
+  return (
+    <div
+      style={{
+        display: "block",
+        width: '100%',
+      }}
+    >
+      <h1 style={{ textAlign: "center", paddingBottom: 40, fontSize: 40 }}>
+        Survey List
+      </h1>
+      <Table dataSource={dataSource} columns={columns} />;
+    </div>
+  );
 }
 
-export default SurveyList
+export default SurveyList;
+
