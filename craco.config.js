@@ -12,6 +12,7 @@ module.exports = {
             options: {
                 lessLoaderOptions: {
                     lessOptions: {
+                        // Change ant design variables here
                         modifyVars: {
                             '@primary-color': '#0092c5'
                         },
