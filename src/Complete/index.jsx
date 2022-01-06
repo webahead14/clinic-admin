@@ -2,8 +2,6 @@ import options from "../utils/allSurveys";
 import { AutoComplete } from "antd";
 
 function Complete(props) {
-  // const [surveyOptions, setSurveyOptions] = useState([]);
-
   const onSelect = (surveyName) => {
     props.setAddWeek((prevWeeks) => {
       return prevWeeks.map((weekObj) => {

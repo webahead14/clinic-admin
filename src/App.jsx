@@ -17,7 +17,6 @@ import ProtocolList from "./pages/ProtocolList";
 import SurveyList from "./pages/SurveyList";
 import AddClient from "./pages/AddClient";
 import AddProtocol from "./pages/AddProtocol";
-import TwoAddProtocol from "./pages/TwoAddProtocol";
 
 import ClientPage from "./pages/ClientPage";
 import ProtocolPage from "./pages/ProtocolPage";
@@ -107,7 +106,6 @@ function App() {
               <Route path="/clients" element={<ClientList />} />
               <Route path="/surveys" element={<SurveyList />} />
               <Route path="/protocols" element={<ProtocolList />} />
-              {/* <Route path="/add/twoprotocol" element={<TwoAddProtocol />} /> */}
               <Route path="/add/protocol" element={<AddProtocol />} />
               <Route path="/add/client" element={<AddClient />} />
               <Route path="/client/:id" element={<ClientPage />} />

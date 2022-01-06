@@ -49,10 +49,13 @@ table {
   width: 120px;
   margin-top: 20px;
   margin-right: auto;
+  background-color: #a5c0d1;
+  border: 1px solid rgb(92, 91, 91);
+  /* margin-top: -0.1px; */
 }
 
 .surveySelection {
-  border: 1px solid black;
+  border: 1px solid rgb(134, 133, 133);
   width: fit-content;
   height: 40px;
   display: flex;
@@ -78,10 +81,13 @@ p {
   display: flex;
   margin-left: 370px;
   cursor: pointer;
+  background-color: #ff7c7c;
 }
 
 .deleteSurvey {
   cursor: pointer;
+  color: rgb(90, 89, 89);
+  margin-top: -7px;
 }
 
 .submitProtocol {
