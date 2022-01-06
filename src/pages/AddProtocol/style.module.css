@@ -1,3 +1,7 @@
+.addProtocol {
+  height: 1100px;
+}
+
 .addProtocolTitle {
   font-size: 40px;
   text-align: center;
@@ -9,8 +13,9 @@
   flex-direction: column;
   align-items: center;
   width: 500px;
-  transform: scale(1.1);
+  transform: scale(1.3);
   margin: auto;
+  margin-top: 90px;
 }
 
 .protocolName {
@@ -28,12 +33,6 @@
   font: 10px;
 }
 
-table {
-  display: flex;
-  position: relative;
-  justify-content: left;
-}
-
 .surveySelection {
   width: fit-content;
   padding: 5px;
@@ -47,7 +46,7 @@ table {
   display: flex;
   justify-content: center;
   width: 120px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right: auto;
   background-color: #a5c0d1;
   border: 1px solid rgb(92, 91, 91);
@@ -79,7 +78,7 @@ p {
 
 .deleteWeek {
   display: flex;
-  margin-left: 370px;
+  margin-left: 350px;
   cursor: pointer;
   background-color: #ff7c7c;
 }
@@ -94,6 +93,7 @@ p {
   background-color: #a5c0d1;
   font-size: 25px;
   margin-top: 20px;
+  height: 50px;
   width: 100px;
-  /* margin-right: auto; */
+  transform: scale(1.2);
 }

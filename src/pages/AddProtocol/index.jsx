@@ -1,6 +1,6 @@
 import style from "./style.module.css";
 import "./style.css";
-import { Collapse, Select } from "antd";
+import { Collapse, Select, Button } from "antd";
 import { useState } from "react";
 import Complete from "../../Complete";
 import { useNavigate } from "react-router-dom";
@@ -19,8 +19,10 @@ function AddProtocol(props) {
 
   //filtering for whatever survey is selected and indicating which week it's in
   function handleChange(value) {
+    //set filter to nothing for now
     filteredWeek = [];
     setHighlighted([]);
+    //for each week that possesses the selected filter, highlight the week.
     addWeek.forEach((week, index) => {
       if (week.surveys.find((element) => element === value)) {
         filteredWeek.push(week.week);
@@ -36,9 +38,10 @@ function AddProtocol(props) {
       setProtocolData({ ...protocolData, [stateKey]: target.value });
 
   const { Panel } = Collapse;
-
+  //useNavigate to redirect to other pages.
   const goTo = useNavigate();
 
+  //redirects when user clicks Submit
   const onSubmit = (event) => {
     event.preventDefault();
     goTo("/");
@@ -66,11 +69,14 @@ function AddProtocol(props) {
 
       <div className={style.allDropdowns}>
         <div className={style.filterSurvey}>
+          {/* Select options from filter. They're the same as the ones in the AutoComplete in the collapse panels. */}
           <Select
             defaultValue="Filter Survey"
             style={{ width: 120 }}
+            //When the filter field changes, the handleChange function modifies the weeks below
             onChange={handleChange}
             allowClear
+            //gets options from hardcoded allSurveys.js
             options={options}
             filterOption={(inputValue, option) =>
               option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
@@ -79,9 +85,10 @@ function AddProtocol(props) {
           ></Select>
         </div>
         <Collapse>
+          {/* //mapping out each panel in the collapse and later attaches it to the add week button so user can add a week to the protocol*/}
           {addWeek.map((obj, index) => (
             <Panel
-              // highlights week
+              // adds styling to the week header in order to indicate where the filtered survey is located
               style={
                 highlighted.includes(obj.week)
                   ? { backgroundColor: " #a5c0d1 " }
@@ -95,6 +102,7 @@ function AddProtocol(props) {
               {/* retrieves autocomplete data from Complete component */}
               <Complete
                 panels={addWeek}
+                //adds the surveys onto the added week
                 surveys={addWeek[obj.week - 1].surveys}
                 id={obj.week}
                 setAddWeek={setAddWeek}
@@ -104,23 +112,26 @@ function AddProtocol(props) {
                   <div className={style.surveyBox}>
                     <p
                       className={style.deleteSurvey}
+                      // deletes surveys from the week
                       onClick={(e) => {
                         setAddWeek((prevArr) => {
                           let temp = [...prevArr];
+                          //filters out the deleted survey and retruens the element without the survey
                           let result = temp[obj.week - 1].surveys.filter(
                             (element) => {
                               return element !== survey;
                             }
                           );
+                          //return the week with the updated surveys
                           temp[obj.week - 1].surveys = [...result];
                           return temp;
                         });
-                        console.log(survey);
                       }}
                     >
                       X
                     </p>
                     <h3
+                      //survey selection CSS
                       className={style.surveySelection}
                       key={idx}
                       value="Search"
@@ -130,9 +141,12 @@ function AddProtocol(props) {
                   </div>
                 );
               })}
+              {/* adds the delete button to the last week added - only.  */}
               {index === addWeek.length - 1 ? (
-                <button
+                <Button
+                  type="secondary"
                   className={style.deleteWeek}
+                  //onClick returns the length of addWeek and returns it without the last week
                   onClick={() => {
                     setAddWeek((prevArr) => {
                       return prevArr.filter(
@@ -142,13 +156,14 @@ function AddProtocol(props) {
                   }}
                 >
                   Delete Week
-                </button>
+                </Button>
               ) : null}
             </Panel>
           ))}
         </Collapse>
+        {/* concating a week onto the existing week(s). */}
         <div className={style.addWeekBtn}></div>
-        <button
+        <Button
           className={style.addWeek}
           onClick={() => {
             const lastWeek = addWeek[addWeek.length - 1];
@@ -158,11 +173,16 @@ function AddProtocol(props) {
           }}
         >
           + Add a week
-        </button>
+        </Button>
 
-        <button className={style.submitProtocol} onClick={onSubmit}>
+        {/* Submit button that works with goTo to redirect user to set page. To redirect, modify onSubmit above */}
+        <Button
+          type="primary"
+          className={style.submitProtocol}
+          onClick={onSubmit}
+        >
           Submit
-        </button>
+        </Button>
       </div>
     </div>
   );
