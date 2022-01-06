@@ -23,7 +23,6 @@ const prefixSelector = (
   </Form.Item>
 );
 
-
 function AddClient(props) {
   return (
     <div
@@ -45,7 +44,6 @@ function AddClient(props) {
           name="name"
           rules={[{ required: true, message: "Please enter a name" }]}
         >
-          {" "}
           <Input />
         </Form.Item>
 

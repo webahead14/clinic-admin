@@ -1,8 +1,8 @@
 import React from "react";
 import style from "./style.module.css";
-import { Button } from "antd";
+import DemoBar from "./Bar";
 import { Line } from "@ant-design/charts";
-
+import DemoPie from "./Pie";
 //data for line chart
 const data = [
   { year: "1991", value: 3 },
@@ -29,8 +29,17 @@ const config = {
 function Home(props) {
   return (
     <div>
-      <h1>Home</h1>
-      <Line {...config} />
+      <div>
+        <Line {...config} />
+      </div>
+      <div style={{ display: "flex" }}>
+        <div style={{ width: 800, padding: 100 }}>
+          <DemoPie />{" "}
+        </div>
+        <div style={{ width: 800, padding: 100 }}>
+          <DemoBar />
+        </div>
+      </div>
     </div>
   );
 }
