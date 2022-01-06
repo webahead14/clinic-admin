@@ -1,0 +1,4 @@
+.ant-card-body {
+  height: 700px !important;
+  overflow: auto !important;
+}

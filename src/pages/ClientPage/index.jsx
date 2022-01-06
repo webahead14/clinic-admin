@@ -1,4 +1,5 @@
 import style from "./style.module.css";
+import "./style.css";
 import React from "react";
 import options from "../../utils/allSurveys";
 import { Card, Tabs, Descriptions, Divider, Collapse } from "antd";
@@ -29,6 +30,34 @@ const Client = {
     name: "PTSD protocol A",
   },
   surveyProgress: [
+    {
+      week: "1",
+      isDone: true,
+      isPartiallyDone: false,
+      hasMissed: false,
+      name: "Survey 1",
+    },
+    {
+      week: "1",
+      isDone: true,
+      isPartiallyDone: false,
+      hasMissed: false,
+      name: "Survey 1",
+    },
+    {
+      week: "1",
+      isDone: true,
+      isPartiallyDone: false,
+      hasMissed: false,
+      name: "Survey 1",
+    },
+    {
+      week: "1",
+      isDone: true,
+      isPartiallyDone: false,
+      hasMissed: false,
+      name: "Survey 1",
+    },
     {
       week: "1",
       isDone: true,
@@ -77,131 +106,102 @@ const Client = {
 function ClientPage(props) {
   // const [client, setClient] = React.useState({}); //this is for when we do the fetch from backend
   // const [surveys, setSurveys] = React.useState([]);
-  // React.useEffect(() => {
-  //   setSurveys((prevArr) => {
-  //     return (prevArr = Client.surveyProgress.map((element) => {
-  //       return (
-  //         <Descriptions.Item>
-  //           <Collapse
-  //             style={{ position: "absolute", padding: "3px,16px" }}
-  //             ghost
-  //           >
-  //             <Panel header={element.name}>
-  //               <p>
-  //                 Progress:
-  //                 {element.isDone ? (
-  //                   <CheckCircleTwoTone twoToneColor="#52c41a" />
-  //                 ) : element.isPartiallyDone ? (
-  //                   <LoadingOutlined />
-  //                 ) : (
-  //                   <CloseCircleOutlined />
-  //                 )}
-  //               </p>
-  //               <p>
-  //                 MissedDate:
-  //                 {element.hasMissed ? (
-  //                   <CheckCircleTwoTone twoToneColor="#52c41a" />
-  //                 ) : (
-  //                   <CloseCircleOutlined />
-  //                 )}
-  //               </p>
-  //             </Panel>
-  //           </Collapse>
-  //         </Descriptions.Item>
-  //       );
-  //     }));
-  //   });
-  //   console.log(surveys);
-  // }, []);
+
   const tabsArray = new Array(8).fill(1);
   return (
     <div>
       <h1>ClientPage</h1>
-      <Card style={{ height: "500px" }}>
-        <Descriptions title="Patient Info">
-          <Descriptions.Item label="ID">{Client.id}</Descriptions.Item>
-          <Descriptions.Item label="Name">{Client.name}</Descriptions.Item>
-          <Descriptions.Item label="Government ID">
-            {Client.govId}
-          </Descriptions.Item>
-          <Descriptions.Item label="Gender">{Client.gender}</Descriptions.Item>
-          <Descriptions.Item label="Phone">{Client.phone}</Descriptions.Item>
-          <Descriptions.Item label="Email">{Client.email}</Descriptions.Item>
-        </Descriptions>
+      <div className={style.cardStyle}>
+        <Card>
+          <Descriptions title="Patient Info">
+            <Descriptions.Item label="ID">{Client.id}</Descriptions.Item>
+            <Descriptions.Item label="Name">{Client.name}</Descriptions.Item>
+            <Descriptions.Item label="Government ID">
+              {Client.govId}
+            </Descriptions.Item>
+            <Descriptions.Item label="Gender">
+              {Client.gender}
+            </Descriptions.Item>
+            <Descriptions.Item label="Phone">{Client.phone}</Descriptions.Item>
+            <Descriptions.Item label="Email">{Client.email}</Descriptions.Item>
+          </Descriptions>
 
-        <Divider></Divider>
+          <Divider></Divider>
 
-        <Descriptions title="Patient File">
-          <Descriptions.Item label="Protocol" span="2">
-            {Client.protocol.name}
-          </Descriptions.Item>
-          <Descriptions.Item>
-            <Collapse
-              style={{ position: "absolute", padding: "3px,16px" }}
-              ghost
-            >
-              <Panel header="Treatment">
-                <p>Status: {Client.treatment.status}</p>
-                <p>StartDate: {Client.treatment.startDate}</p>
-              </Panel>
-            </Collapse>
-          </Descriptions.Item>
-          <Descriptions.Item label="Condition" span="2">
-            {Client.condition}
-          </Descriptions.Item>
-        </Descriptions>
+          <Descriptions title="Patient File">
+            <Descriptions.Item label="Protocol" span="2">
+              {Client.protocol.name}
+            </Descriptions.Item>
+            <Descriptions.Item>
+              <Collapse
+                style={{ position: "sticky", padding: "3px,16px" }}
+                ghost
+              >
+                <Panel header="Treatment" className={style.test}>
+                  <p>StartDate: {Client.treatment.startDate}</p>
+                  <p>Status: {Client.treatment.status}</p>
+                </Panel>
+              </Collapse>
+            </Descriptions.Item>
+            <Descriptions.Item label="Condition" span="2">
+              {Client.condition}
+            </Descriptions.Item>
+          </Descriptions>
 
-        <Divider></Divider>
+          <Divider orientation="left">Survey</Divider>
 
-        <Tabs defaultActiveKey="1">
-          {tabsArray.map((Element, index) => {
-            return (
-              <TabPane tab={`week ${index + 1}`} key={`${index + 1}`}>
-                <Descriptions title="surveyProgress">
-                  {Client.surveyProgress
-                    ? Client.surveyProgress
-                        .map((element, idx) => {
-                          console.log(element.week + " " + index);
-                          if (element.week === `${index + 1}`) {
-                            console.log(1);
-                            return (
-                              <Descriptions.Item key={idx}>
-                                <Collapse style={{ padding: "3px,16px" }} ghost>
-                                  <Panel header={element.name}>
-                                    <p>
-                                      Progress:
-                                      {element.isDone ? (
-                                        <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                      ) : element.isPartiallyDone ? (
-                                        <LoadingOutlined />
-                                      ) : (
-                                        <CloseCircleTwoTone twoToneColor="#fc6161" />
-                                      )}
-                                    </p>
-                                    <p>
-                                      MissedDate:
-                                      {element.hasMissed ? (
-                                        <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                      ) : (
-                                        <CloseCircleTwoTone twoToneColor="#fc6161" />
-                                      )}
-                                    </p>
-                                  </Panel>
-                                </Collapse>
-                              </Descriptions.Item>
-                            );
-                          } else {
-                            return null;
-                          }
-                        })
-                        .filter((x) => x)
-                    : null}
-                </Descriptions>
-              </TabPane>
-            );
-          })}
-        </Tabs>
-      </Card>
+          <Tabs defaultActiveKey="1">
+            {tabsArray.map((Element, index) => {
+              return (
+                <TabPane tab={`Week ${index + 1}`} key={`${index + 1}`}>
+                  <Descriptions>
+                    {Client.surveyProgress
+                      ? Client.surveyProgress
+                          .map((element, idx) => {
+                            if (element.week === `${index + 1}`) {
+                              return (
+                                <Descriptions.Item key={idx}>
+                                  <Collapse
+                                    accordion="true"
+                                    style={{ padding: "3px,16px" }}
+                                    ghost
+                                  >
+                                    <Panel header={element.name}>
+                                      <p>
+                                        Progress:
+                                        {element.isDone ? (
+                                          <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                        ) : element.isPartiallyDone ? (
+                                          <LoadingOutlined />
+                                        ) : (
+                                          <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                        )}
+                                      </p>
+                                      <p>
+                                        MissedDate:
+                                        {element.hasMissed ? (
+                                          <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                        ) : (
+                                          <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                        )}
+                                      </p>
+                                    </Panel>
+                                  </Collapse>
+                                </Descriptions.Item>
+                              );
+                            } else {
+                              return null;
+                            }
+                          })
+                          .filter((x) => x)
+                      : null}
+                  </Descriptions>
+                </TabPane>
+              );
+            })}
+          </Tabs>
+        </Card>
+      </div>
     </div>
   );
 }
