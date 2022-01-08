@@ -1,8 +1,9 @@
 import style from './style.module.css';
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 import { useEffect, useState } from 'react';
 import { getProtocolsList } from '../../utils/api';
 import { showError } from '../../utils/functions';
+import { useNavigate } from "react-router-dom";
 
 const columns = [
   {
@@ -34,6 +35,7 @@ const columns = [
 
 function ProtocolList() {
   const [protocolList, setProtocolList] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     getProtocolsList()
       .then((protocols) => {
@@ -51,10 +53,15 @@ function ProtocolList() {
   return (
     <div className={style.protocolList}>
       <h1 className={style.title}>Protocol list</h1>
+      <div style={{ paddingBottom: 10 }}>
+        <Button type="primary" onClick={() => navigate("/add/protocol")}>
+          Add Protocol
+        </Button>
+      </div>
       <Table
         dataSource={protocolList}
         columns={columns}
-        // pagination={{ pageSize: 5 }}
+      // pagination={{ pageSize: 5 }}
       />
       ;
     </div>
