@@ -1,126 +1,135 @@
 import style from "./style.module.css";
-import React, { useState } from "react";
-import Complete from "../../Complete";
-
+import "./style.css";
+import axios from "axios";
+import React from "react";
+import { Card, Tabs, Descriptions, Divider, Collapse } from "antd";
 import {
-  Form,
-  Input,
-  Radio,
-  DatePicker,
-  TimePicker,
-  Select,
-  Button,
-} from "antd";
+  CloseCircleTwoTone,
+  CheckCircleTwoTone,
+  LoadingOutlined,
+} from "@ant-design/icons";
 
-const { Option } = Select;
+const { Panel } = Collapse;
 
-const prefixSelector = (
-  <Form.Item name="prefix" noStyle>
-    <Select style={{ width: 70 }}>
-      <Option value="972">+972</Option>
-      {/* <Option value=""></Option> */}
-    </Select>
-  </Form.Item>
-);
+const { TabPane } = Tabs;
 
 
-function AddClient(props) {
-  return (
-    <div
-      style={{
-        display: "block",
-        width: 700,
-        padding: 30,
-      }}
-    >
-      <h4>Add a client</h4>
-      <Form
-        name="basicform"
-        onFinishFailed={() => alert("Failed to submit")}
-        onFinish={() => alert("Form Submitted")}
-        initialValues={{ remember: true }}
-      >
-        <Form.Item
-          label="Name"
-          name="name"
-          rules={[{ required: true, message: "Please enter a name" }]}
-        >
-          {" "}
-          <Input />
-        </Form.Item>
 
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{ required: true, message: "Please enter an email" }]}
-        >
-          <Input />
-        </Form.Item>
+function ClientPage(props) {
+  const [client, setClient] = React.useState({}); //this is for when we do the fetch from backend
+  React.useEffect(() => {
+    const token = localStorage.getItem("token");
 
-        <Form.Item
-          label="Passcode"
-          name="password"
-          rules={[{ required: true, message: "Please choose a password!" }]}
-        >
-          <Input.Password />
-        </Form.Item>
+    axios
+      .get("http://localhost:4000/api/clinic/client/1", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((data) => {
+        setClient((client) => (client = data.data));
+      });
+  }, []);
 
-        <Form.Item
-          name="Phone"
-          label="Phone Number"
-          rules={[{ required: true, message: "Please insert a phone number!" }]}
-        >
-          <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
-        </Form.Item>
+  const tabsArray = new Array(8).fill((props) => (
+    <TabPane {...props}>{props.children}</TabPane>
+  ));
 
-        <Form.Item
-          label="Condition"
-          name="condition"
-          rules={[{ required: true, message: "Please enter a condition" }]}
-        >
-          <Input />
-        </Form.Item>
+  return JSON.stringify(client) !== "{}" ? (
+    <div>
+      <h1>ClientPage</h1>
+      <Card>
+        <Descriptions title="Patient Info">
+          <Descriptions.Item label="ID">{client.id}</Descriptions.Item>
+          <Descriptions.Item label="Name">{client.name}</Descriptions.Item>
+          <Descriptions.Item label="Government ID">
+            {client.govId}
+          </Descriptions.Item>
+          <Descriptions.Item label="Gender">{client.gender}</Descriptions.Item>
+          <Descriptions.Item label="Phone">{client.phone}</Descriptions.Item>
+          <Descriptions.Item label="Email">{client.email}</Descriptions.Item>
+        </Descriptions>
 
-        <Form.Item
-          name="gender"
-          label="Gender"
-          rules={[{ required: true, message: "Please select a gender!" }]}
-        >
-          <Radio.Group name="radiogroup" defaultValue={1}>
-            <Radio value={1}>Male</Radio>
-            <Radio value={2}>Female</Radio>
-            <Radio value={3}>Other</Radio>
-          </Radio.Group>
-        </Form.Item>
+        <Divider></Divider>
 
-        <Form.Item
-          name="Date"
-          label="Start Date"
-          rules={[{ required: true, message: "Please choose a date!" }]}
-        >
-          <DatePicker />
-        </Form.Item>
+        <Descriptions title="Patient File">
+          <Descriptions.Item label="Protocol" span="2">
+            {client.protocol.name}
+          </Descriptions.Item>
+          <Descriptions.Item>
+            <Collapse style={{}} ghost>
+              <Panel
+                header="Treatment"
+                style={{ padding: 0 }}
+                className={style.test}
+              >
+                <div style={{ position: "absolute" }}>
+                  <p>StartDate: {client.treatment.startDate.split("T")[0]}</p>
+                  <p>Status: {client.treatment.status}</p>
+                </div>
+              </Panel>
+            </Collapse>
+          </Descriptions.Item>
+          <Descriptions.Item label="Condition" span="2">
+            {client.condition}
+          </Descriptions.Item>
+        </Descriptions>
 
-        <Form.Item
-          name="protocol"
-          label="Choose a protocol"
-          rules={[{ required: true, message: "Please choose a protocol!" }]}
-        >
-          <Complete />
-        </Form.Item>
+        <Divider orientation="left">Survey</Divider>
 
-        <Form.Item name="reminder" label="Reminder">
-          <TimePicker /> <TimePicker /> <TimePicker />
-        </Form.Item>
-
-        <Form.Item>
-          <Button type="success" htmlType="submit">
-            Add
-          </Button>
-        </Form.Item>
-      </Form>
+        <Tabs defaultActiveKey="1">
+          {tabsArray.map((Element, index) => {
+            return (
+              <Element tab={`Week ${index + 1}`} key={`${index + 1}`}>
+                <Descriptions>
+                  {client.surveyProgress
+                    ? client.surveyProgress
+                      .map((element, idx) => {
+                        if (element.week === index + 1) {
+                          return (
+                            <Descriptions.Item key={idx}>
+                              <Collapse
+                                accordion="true"
+                                style={{ padding: "3px,16px" }}
+                                ghost
+                              >
+                                <Panel header={element.name}>
+                                  <div>
+                                    Has finished: &nbsp;
+                                    {element.isDone ? (
+                                      <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                    ) : element.isPartiallyDone ? (
+                                      <LoadingOutlined />
+                                    ) : (
+                                      <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                    )}
+                                  </div>
+                                  <div>
+                                    Did not finish: &nbsp;
+                                    {element.hasMissed ? (
+                                      <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                    ) : (
+                                      <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                    )}
+                                  </div>
+                                </Panel>
+                              </Collapse>
+                            </Descriptions.Item>
+                          );
+                        } else {
+                          return null;
+                        }
+                      })
+                      .filter((x) => x)
+                    : null}
+                </Descriptions>
+              </Element>
+            );
+          })}
+        </Tabs>
+      </Card>
     </div>
-  );
+  ) : null;
 }
 
-export default AddClient;
+export default ClientPage;

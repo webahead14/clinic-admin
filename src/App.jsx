@@ -1,4 +1,3 @@
-
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
@@ -37,7 +36,7 @@ function App() {
   //       res.data <- no need to JSON.parse the response
   //     })
   //     .catch()
-
+  //
   //   axios.post(url, { body: {} }) <- no need to JSON.stringify the body
   //     .then((res) => {
   //       res.data
@@ -51,7 +50,7 @@ function App() {
 
   // To change the color of the dark mode refer to the craco.config.js file
   return (
-    <Layout dir="ltr">
+    <Layout dir="ltr" style={{ height: "100vh" }}>
       <Header className="header">
         <div>
           <h2 style={{ color: "white", margin: "0 10px 0 -30px" }}>
