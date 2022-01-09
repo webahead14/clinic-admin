@@ -1,19 +1,27 @@
 const options = [
   {
     id: 1,
-    label: "PTSD",
+    value: "PCL-5",
   },
   {
     id: 2,
-    label: "ADHD",
+    value: "GAD",
   },
   {
     id: 3,
-    label: "PTSD2",
+    value: "PHQ",
   },
   {
     id: 4,
-    label: "Anxiety",
+    value: "PGI-S",
+  },
+  {
+    id: 5,
+    value: "PGI-A",
+  },
+  {
+    id: 6,
+    value: "PGI-T",
   },
 ];
 export default options;
