@@ -5,27 +5,27 @@ import { Pie } from "@ant-design/charts";
 const DemoPie = () => {
   const data = [
     {
-      type: "分类一",
+      type: "ADHD",
       value: 27,
     },
     {
-      type: "分类二",
+      type: "ADD",
       value: 25,
     },
     {
-      type: "分类三",
+      type: "PTSD",
       value: 18,
     },
     {
-      type: "分类四",
+      type: "WEIRDO",
       value: 15,
     },
     {
-      type: "分类五",
+      type: "BET-HOON",
       value: 10,
     },
     {
-      type: "其他",
+      type: "IT'S OKAY",
       value: 5,
     },
   ];

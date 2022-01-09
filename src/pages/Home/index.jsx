@@ -30,13 +30,22 @@ function Home(props) {
   return (
     <div>
       <div>
+        <div style={{ textAlign: "center", fontSize: 30, paddingBottom: 20 }}>
+          <h>Line Chart</h>
+        </div>
         <Line {...config} />
       </div>
       <div style={{ display: "flex" }}>
         <div style={{ width: 800, padding: 100 }}>
+          <div style={{ textAlign: "center", fontSize: 30 }}>
+            <h>Pie Chart</h>
+          </div>
           <DemoPie />{" "}
         </div>
         <div style={{ width: 800, padding: 100 }}>
+          <div style={{ textAlign: "center", fontSize: 30, paddingBottom: 20 }}>
+            <h>Bar Chart</h>
+          </div>
           <DemoBar />
         </div>
       </div>
