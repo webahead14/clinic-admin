@@ -1,12 +1,2 @@
 .cardStyle {
-  height: auto;
-  max-height: 10%;
-  overflow: auto;
-}
-.ant-collapse-content-box .posAbs {
-  position: absolute;
-}
-
-.test {
-  position: absolute;
 }

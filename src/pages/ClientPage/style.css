@@ -1,4 +1,9 @@
 .ant-card-body {
-  height: 700px !important;
-  overflow: auto !important;
+  /* height: 1000px !important; */
+  /* overflow: auto !important; */
+}
+body {
+  height: auto;
+  min-height: 100vh;
+  background-color: #f0f2f5 !important;
 }
