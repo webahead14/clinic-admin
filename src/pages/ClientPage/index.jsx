@@ -34,6 +34,7 @@ function ClientPage(props) {
   const tabsArray = new Array(8).fill((props) => (
     <TabPane {...props}>{props.children}</TabPane>
   ));
+
   return JSON.stringify(client) !== "{}" ? (
     <div>
       <h1>ClientPage</h1>
@@ -83,43 +84,43 @@ function ClientPage(props) {
                 <Descriptions>
                   {client.surveyProgress
                     ? client.surveyProgress
-                        .map((element, idx) => {
-                          if (element.week === index + 1) {
-                            return (
-                              <Descriptions.Item key={idx}>
-                                <Collapse
-                                  accordion="true"
-                                  style={{ padding: "3px,16px" }}
-                                  ghost
-                                >
-                                  <Panel header={element.name}>
-                                    <p>
-                                      Progress:
-                                      {element.isDone ? (
-                                        <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                      ) : element.isPartiallyDone ? (
-                                        <LoadingOutlined />
-                                      ) : (
-                                        <CloseCircleTwoTone twoToneColor="#fc6161" />
-                                      )}
-                                    </p>
-                                    <p>
-                                      MissedDate:
-                                      {element.hasMissed ? (
-                                        <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                      ) : (
-                                        <CloseCircleTwoTone twoToneColor="#fc6161" />
-                                      )}
-                                    </p>
-                                  </Panel>
-                                </Collapse>
-                              </Descriptions.Item>
-                            );
-                          } else {
-                            return null;
-                          }
-                        })
-                        .filter((x) => x)
+                      .map((element, idx) => {
+                        if (element.week === index + 1) {
+                          return (
+                            <Descriptions.Item key={idx}>
+                              <Collapse
+                                accordion="true"
+                                style={{ padding: "3px,16px" }}
+                                ghost
+                              >
+                                <Panel header={element.name}>
+                                  <div>
+                                    Has finished: &nbsp;
+                                    {element.isDone ? (
+                                      <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                    ) : element.isPartiallyDone ? (
+                                      <LoadingOutlined />
+                                    ) : (
+                                      <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                    )}
+                                  </div>
+                                  <div>
+                                    Did not finish: &nbsp;
+                                    {element.hasMissed ? (
+                                      <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                    ) : (
+                                      <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                    )}
+                                  </div>
+                                </Panel>
+                              </Collapse>
+                            </Descriptions.Item>
+                          );
+                        } else {
+                          return null;
+                        }
+                      })
+                      .filter((x) => x)
                     : null}
                 </Descriptions>
               </Element>
