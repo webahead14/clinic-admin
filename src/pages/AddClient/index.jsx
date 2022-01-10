@@ -1,7 +1,7 @@
 import style from "./style.module.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Complete from "../../Complete";
-
+import axios from "axios";
 import {
   Form,
   Input,
@@ -23,8 +23,29 @@ const prefixSelector = (
   </Form.Item>
 );
 
-
 function AddClient(props) {
+  const [data, setData] = useState({
+    name: "",
+    passcode: "",
+    gov_id: "",
+    condition: "",
+    phone: "",
+    email: "",
+    gender: "",
+    protocolId: "",
+    startDate: "",
+  });
+  function addClient(data) {
+    axios
+      .post("http://localhost:4000/api/client/register", { body: { data } })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch();
+  }
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <div
       style={{
@@ -37,21 +58,25 @@ function AddClient(props) {
       <Form
         name="basicform"
         onFinishFailed={() => alert("Failed to submit")}
-        onFinish={() => alert("Form Submitted")}
+        onFinish={() => {
+          addClient(data);
+          alert("Form Submitted");
+        }}
         initialValues={{ remember: true }}
       >
         <Form.Item
           label="Name"
           name="name"
+          onChange={(e) => setData({ ...data, name: e.target.value })}
           rules={[{ required: true, message: "Please enter a name" }]}
         >
-          {" "}
           <Input />
         </Form.Item>
 
         <Form.Item
           label="Email"
           name="email"
+          onChange={(e) => setData({ ...data, email: e.target.value })}
           rules={[{ required: true, message: "Please enter an email" }]}
         >
           <Input />
@@ -60,6 +85,7 @@ function AddClient(props) {
         <Form.Item
           label="Passcode"
           name="password"
+          onChange={(e) => setData({ ...data, passcode: e.target.value })}
           rules={[{ required: true, message: "Please choose a password!" }]}
         >
           <Input.Password />
@@ -68,6 +94,7 @@ function AddClient(props) {
         <Form.Item
           name="Phone"
           label="Phone Number"
+          onChange={(e) => setData({ ...data, phone: e.target.value })}
           rules={[{ required: true, message: "Please insert a phone number!" }]}
         >
           <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
@@ -78,12 +105,24 @@ function AddClient(props) {
           name="condition"
           rules={[{ required: true, message: "Please enter a condition" }]}
         >
-          <Input />
+          <Input
+            onChange={(e) => setData({ ...data, condition: e.target.value })}
+          />
         </Form.Item>
 
         <Form.Item
           name="gender"
           label="Gender"
+          onChange={(e) => {
+            console.log(e.target.value);
+            if (e.target.value == 1) {
+              setData({ ...data, gender: "male" });
+            } else if (e.target.value == 2) {
+              setData({ ...data, gender: "female" });
+            } else {
+              setData({ ...data, gender: "other" });
+            }
+          }}
           rules={[{ required: true, message: "Please select a gender!" }]}
         >
           <Radio.Group name="radiogroup" defaultValue={1}>
@@ -98,12 +137,17 @@ function AddClient(props) {
           label="Start Date"
           rules={[{ required: true, message: "Please choose a date!" }]}
         >
-          <DatePicker />
+          <DatePicker
+            onChange={(e, dateString) =>
+              setData({ ...data, startDate: dateString })
+            }
+          />
         </Form.Item>
 
         <Form.Item
           name="protocol"
           label="Choose a protocol"
+          onChange={(e) => setData({ ...data, protocol: e.target.value })}
           rules={[{ required: true, message: "Please choose a protocol!" }]}
         >
           <Complete />

@@ -1,19 +1,14 @@
-const options = [
-  {
-    id: 1,
-    label: "PTSD",
-  },
-  {
-    id: 2,
-    label: "ADHD",
-  },
-  {
-    id: 3,
-    label: "PTSD2",
-  },
-  {
-    id: 4,
-    label: "Anxiety",
-  },
-];
-export default options;
+import axios from "axios";
+
+function fetchProtocols() {
+  return axios.get("http://localhost:4000/api/clinic/protocols").then((res) => {
+    const options = res.data.protocols.map((protocol) => ({
+      id: protocol.id,
+      label: protocol.name,
+    }));
+    console.log("op", options);
+    return options;
+  });
+}
+
+export default fetchProtocols;
