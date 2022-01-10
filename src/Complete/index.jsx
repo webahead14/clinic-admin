@@ -10,6 +10,14 @@ function Complete(props) {
       setOptions(data);
     });
   }, []);
+
+  useEffect(() => {
+    props.updateData({ ...props.currentData, protocolId: value });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+  const onSelect = (data) => {
+    setValue(data);
+  };
   return (
     <AutoComplete
       style={{
@@ -17,9 +25,7 @@ function Complete(props) {
       }}
       options={options}
       value={value}
-      onClick={(e) => {
-        setValue(e.target.textContent);
-      }}
+      onSelect={onSelect}
       placeholder="Search for a protocol"
     />
   );
