@@ -1,4 +1,3 @@
-import style from "./style.module.css";
 import React, { useState, useEffect } from "react";
 import Complete from "../../Complete";
 import axios from "axios";
@@ -147,10 +146,11 @@ function AddClient(props) {
         <Form.Item
           name="protocol"
           label="Choose a protocol"
-          onChange={(e) => setData({ ...data, protocol: e.target.value })}
           rules={[{ required: true, message: "Please choose a protocol!" }]}
         >
-          <Complete />
+          <Complete
+            onFinish={(e) => setData({ ...data, protocol: e.target.value })}
+          />
         </Form.Item>
 
         <Form.Item name="reminder" label="Reminder">
