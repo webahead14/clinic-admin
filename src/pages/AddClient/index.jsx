@@ -62,11 +62,26 @@ function AddClient(props) {
         onFinishFailed={() => alert("Failed to submit")}
         onFinish={() => {
           postClient(data)
-            .then((data) => {
+            .then((tr) => {
+              console.log(tr);
               showMessage("client added", "success");
             })
             .catch((error) => {
-              console.log(error);
+              const errorMessage = error.response.data.message;
+              if (
+                errorMessage ==
+                'duplicate key value violates unique constraint "clients_phone_key"'
+              ) {
+                showMessage("Phone number is already taken", "error");
+              } else if (
+                errorMessage ==
+                'duplicate key value violates unique constraint "clients_email_key"'
+              ) {
+                showMessage("Email is already taken", "error");
+              } else if (errorMessage == "client already exists") {
+                showMessage("Government id is already taken", "error");
+              }
+              console.log(error.response.data.message);
               // showMessage(error.data, "error");
             });
         }}

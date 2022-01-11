@@ -45,12 +45,7 @@ function SurveyList() {
   return (
     <div className={style.surveyList}>
       <h1 className={style.title}>Survey List</h1>
-      <Table
-        dataSource={surveyList}
-        columns={columns}
-        // pagination={{ pageSize: 5 }}
-      />
-      ;
+      <Table dataSource={surveyList} columns={columns} />;
     </div>
   );
 }
