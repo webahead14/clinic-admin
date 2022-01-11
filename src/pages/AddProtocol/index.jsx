@@ -2,9 +2,9 @@ import style from "./style.module.css";
 import "./style.css";
 import { Collapse, Select, Button } from "antd";
 import { useState } from "react";
-import Complete from "../../Complete";
+import Complete from "../../components/Complete";
 import { useNavigate } from "react-router-dom";
-import options from "../../utils/allSurveys";
+import options from "../../utils/allSurverys";
 
 function AddProtocol(props) {
   const [addWeek, setAddWeek] = useState([{ week: 1, surveys: [] }]);

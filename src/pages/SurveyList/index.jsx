@@ -1,8 +1,8 @@
-import style from './style.module.css';
-import { Table } from 'antd';
-import { useEffect, useState } from 'react';
-import { getSurveysList } from '../../utils/api';
-import { showError } from '../../utils/functions';
+import style from "./style.module.css";
+import { Table } from "antd";
+import { useEffect, useState } from "react";
+import { getSurveysList } from "../../utils/api";
+import { showMessage } from "../../utils/functions";
 
 const columns = [
   {
@@ -39,7 +39,7 @@ function SurveyList() {
       })
       .catch((err) => {
         console.error(err);
-        showError(err);
+        showMessage(err, "error");
       });
   }, []);
   return (
@@ -56,4 +56,3 @@ function SurveyList() {
 }
 
 export default SurveyList;
-

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Complete from "../../components/ProtocolComplete";
-import axios from "axios";
+import { postClient } from "../../utils/api";
 import {
   Form,
   Input,
@@ -10,6 +10,7 @@ import {
   Select,
   Button,
 } from "antd";
+import { showMessage } from "../../utils/functions";
 
 const { Option } = Select;
 
@@ -26,25 +27,27 @@ function AddClient(props) {
   const [data, setData] = useState({
     name: "",
     passcode: "",
-    gov_id: "",
+    govId: "",
     condition: "",
     phone: "",
     email: "",
     gender: "",
     protocolId: "",
     startDate: "",
+    reminders: [],
   });
-  function addClient(data) {
-    axios
-      .post("http://localhost:4000/api/client/register", { body: { data } })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch();
-  }
+  const [reminder, setReminder] = useState({
+    reminder1: {},
+    reminder2: {},
+    reminder3: {},
+  });
+
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    setData({
+      ...data,
+      reminders: [reminder.reminder1, reminder.reminder2, reminder.reminder3],
+    });
+  }, [reminder]);
   return (
     <div
       style={{
@@ -58,10 +61,15 @@ function AddClient(props) {
         name="basicform"
         onFinishFailed={() => alert("Failed to submit")}
         onFinish={() => {
-          addClient(data);
-          alert("Form Submitted");
+          postClient(data)
+            .then((data) => {
+              showMessage("client added", "success");
+            })
+            .catch((error) => {
+              console.log(error);
+              // showMessage(error.data, "error");
+            });
         }}
-        initialValues={{ remember: true }}
       >
         <Form.Item
           label="Name"
@@ -71,7 +79,14 @@ function AddClient(props) {
         >
           <Input />
         </Form.Item>
-
+        <Form.Item
+          label="Government Id"
+          name="GovId"
+          onChange={(e) => setData({ ...data, govId: e.target.value })}
+          rules={[{ required: true, message: "Please enter a name" }]}
+        >
+          <Input />
+        </Form.Item>
         <Form.Item
           label="Email"
           name="email"
@@ -113,7 +128,6 @@ function AddClient(props) {
           name="gender"
           label="Gender"
           onChange={(e) => {
-            console.log(e.target.value);
             if (e.target.value == 1) {
               setData({ ...data, gender: "male" });
             } else if (e.target.value == 2) {
@@ -132,7 +146,7 @@ function AddClient(props) {
         </Form.Item>
 
         <Form.Item
-          name="Date"
+          name="startDate"
           label="Start Date"
           rules={[{ required: true, message: "Please choose a date!" }]}
         >
@@ -143,16 +157,33 @@ function AddClient(props) {
           />
         </Form.Item>
 
-        <Form.Item
-          name="protocol"
-          label="Choose a protocol"
-          rules={[{ required: true, message: "Please choose a protocol!" }]}
-        >
-          <Complete updateData={setData} currentData={data} />
+        <Form.Item name="protocol" label="Choose a protocol">
+          <Complete
+            updateData={setData}
+            currentData={data}
+            rules={[{ required: true, message: "Please choose a protocol!" }]}
+          />
         </Form.Item>
 
         <Form.Item name="reminder" label="Reminder">
-          <TimePicker /> <TimePicker /> <TimePicker />
+          <TimePicker
+            onChange={(e, dateString) => {
+              const obj = { time: dateString, has_sent: false };
+              setReminder({ ...reminder, reminder1: obj });
+            }}
+          />{" "}
+          <TimePicker
+            onChange={(e, dateString) => {
+              const obj = { time: dateString, has_sent: false };
+              setReminder({ ...reminder, reminder2: obj });
+            }}
+          />{" "}
+          <TimePicker
+            onChange={(e, dateString) => {
+              const obj = { time: dateString, has_sent: false };
+              setReminder({ ...reminder, reminder3: obj });
+            }}
+          />
         </Form.Item>
 
         <Form.Item>

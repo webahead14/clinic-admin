@@ -1,6 +1,7 @@
-import fetchProtocols from "../../utils/allSurveys.js";
-import { AutoComplete } from "antd";
+import { fetchProtocols } from "../../utils/api";
+import { Select } from "antd";
 import React, { useState, useEffect } from "react";
+const { Option } = Select;
 
 function Complete(props) {
   const [options, setOptions] = useState([]);
@@ -15,15 +16,19 @@ function Complete(props) {
     props.updateData({ ...props.currentData, protocolId: data });
   };
   return (
-    <AutoComplete
-      style={{
-        width: 200,
-      }}
-      options={options}
-      value={props.currentData.protocolId}
-      onSelect={onSelect}
-      placeholder="Search for a protocol"
-    />
+    <Select
+      showSearch
+      placeholder="Select a Protocol"
+      optionFilterProp="children"
+      onChange={onSelect}
+      filterOption={(input, option) =>
+        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      }
+    >
+      {options.map((protocol) => {
+        return <Option value={protocol.value}>{protocol.label}</Option>;
+      })}
+    </Select>
   );
 }
 
