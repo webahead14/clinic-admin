@@ -1,0 +1,99 @@
+.addProtocol {
+  height: 1100px;
+}
+
+.addProtocolTitle {
+  font-size: 40px;
+  text-align: center;
+}
+
+.allDropdowns {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  transform: scale(1.3);
+  margin: auto;
+  margin-top: 90px;
+}
+
+.protocolName {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+.filterSurvey {
+  margin-left: 380px;
+  margin-top: 20px;
+}
+
+.surveyName {
+  margin-left: 10px;
+  font: 10px;
+}
+
+.surveySelection {
+  width: fit-content;
+  padding: 5px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 15px 10px;
+}
+
+.addWeek {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  margin-top: 10px;
+  margin-right: auto;
+  background-color: #a5c0d1;
+  border: 1px solid rgb(92, 91, 91);
+  /* margin-top: -0.1px; */
+}
+
+.surveySelection {
+  border: 1px solid rgb(134, 133, 133);
+  width: fit-content;
+  height: 40px;
+  display: flex;
+  margin-left: 15px;
+  flex-direction: row;
+}
+
+.surveyBox {
+  position: relative;
+  display: table-cell;
+  margin-left: 10px;
+}
+
+p {
+  display: flex;
+  position: absolute;
+  top: 18px;
+  left: 1px;
+  font-size: 18px;
+}
+
+.deleteWeek {
+  display: flex;
+  margin-left: 350px;
+  cursor: pointer;
+  background-color: #ff7c7c;
+}
+
+.deleteSurvey {
+  cursor: pointer;
+  color: rgb(90, 89, 89);
+  margin-top: -7px;
+}
+
+.submitProtocol {
+  background-color: #a5c0d1;
+  font-size: 25px;
+  margin-top: 20px;
+  height: 50px;
+  width: 100px;
+  transform: scale(1.2);
+}

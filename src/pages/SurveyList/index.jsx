@@ -1,32 +1,8 @@
-import style from "./style.module.css";
-import { Table } from "antd";
-
-const dataSource = [
-  {
-    id: 1,
-    name: "PCL-5",
-    questionsAmount: 5,
-    date: "16-01-2021",
-  },
-  {
-    id: 2,
-    name: "GAD",
-    questionsAmount: 20,
-    date: "01-06-2021",
-  },
-  {
-    id: 3,
-    name: "PST-420-BLAZEIT",
-    questionsAmount: 200,
-    date: "01-01-2022",
-  },
-  {
-    id: 4,
-    name: "THC",
-    questionsAmount: 55,
-    date: "01-01-2022",
-  },
-];
+import style from './style.module.css';
+import { Table } from 'antd';
+import { useEffect, useState } from 'react';
+import { getSurveysList } from '../../utils/api';
+import { showError } from '../../utils/functions';
 
 const columns = [
   {
@@ -51,20 +27,33 @@ const columns = [
   },
 ];
 
-function SurveyList(props) {
+function SurveyList() {
+  const [surveyList, setSurveyList] = useState([]);
+  useEffect(() => {
+    getSurveysList()
+      .then((surveys) => {
+        for (const survey of surveys) {
+          survey.key = survey.id;
+        }
+        setSurveyList(surveys);
+      })
+      .catch((err) => {
+        console.error(err);
+        showError(err);
+      });
+  }, []);
   return (
-    <div
-      style={{
-        display: "block",
-        width: '100%',
-      }}
-    >
-      <h1 style={{ textAlign: "center", paddingBottom: 40, fontSize: 40 }}>
-        Survey List
-      </h1>
-      <Table dataSource={dataSource} columns={columns} />;
+    <div className={style.surveyList}>
+      <h1 className={style.title}>Survey List</h1>
+      <Table
+        dataSource={surveyList}
+        columns={columns}
+        // pagination={{ pageSize: 5 }}
+      />
+      ;
     </div>
   );
 }
 
 export default SurveyList;
+

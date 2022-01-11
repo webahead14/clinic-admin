@@ -1,0 +1,11 @@
+.ant-collapse {
+  width: 500px;
+}
+
+.ant-collapse-header {
+  cursor: default;
+}
+
+.ant-btn-secondary {
+  margin-right: 10px;
+}

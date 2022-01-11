@@ -89,7 +89,14 @@ function ClientList(props) {
             Add Client
           </Button>
         </div>
-        <Table dataSource={dataSource} columns={columns} />;
+        <Table
+          onRow={(record) => {
+            return { onClick: () => navigate(`/client/${record.id}`) };
+          }}
+          dataSource={dataSource}
+          columns={columns}
+        />
+        ;
       </div>
     </div>
   );

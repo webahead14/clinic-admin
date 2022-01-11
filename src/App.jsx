@@ -8,6 +8,7 @@ import {
   TeamOutlined,
   FileOutlined,
   UserOutlined,
+  FundOutlined,
 } from "@ant-design/icons";
 
 import Login from "./pages/Login";
@@ -68,6 +69,14 @@ function App() {
           <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
             <Menu.Item
               key="1"
+              onClick={() => navigate("/")}
+              icon={<FundOutlined />}
+              style={{ marginTop: 0 }}
+            >
+              Dashboard
+            </Menu.Item>
+            <Menu.Item
+              key="2"
               onClick={() => navigate("/clients")}
               icon={<TeamOutlined />}
               style={{ marginTop: 0 }}
@@ -75,27 +84,19 @@ function App() {
               Client list
             </Menu.Item>
             <Menu.Item
-              key="2"
+              key="3"
               onClick={() => navigate("/protocols")}
               icon={<ApartmentOutlined />}
             >
               Protocol list
             </Menu.Item>
             <Menu.Item
-              key="3"
+              key="4"
               onClick={() => navigate("/surveys")}
               icon={<FileOutlined />}
             >
               Survey list
             </Menu.Item>
-            <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-              <Menu.Item key="4">Bill</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
-            </SubMenu>
           </Menu>
         </Sider>
         <Content style={{ margin: "0 16px" }}>
