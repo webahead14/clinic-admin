@@ -30,6 +30,6 @@ export function postClient(data) {
     throw new Error("Please Choose A Protocol");
   } else {
     alert("Form Submitted");
-    return axios.post("http://localhost:4000/api/client/register", { data });
+    return axios.post("http://localhost:4000/api/client/register", data);
   }
 }
