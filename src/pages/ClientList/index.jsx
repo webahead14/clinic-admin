@@ -66,8 +66,8 @@ const columns = [
     key: "phone",
   },
   {
-    title: "start date",
-    dataIndex: "start_date",
+    title: "Start date",
+    dataIndex: "startDate",
     key: "start date",
   },
   {
@@ -172,12 +172,13 @@ const columns = [
 
 function ClientList(props) {
   const [clientsList, setClientsList] = useState([]);
+
   useEffect(() => {
     getClientsList()
       .then((clients) => {
         for (const client of clients) {
           client.key = client.id;
-          client.start_date = client.start_date.split("T")[0];
+          client.startDate = client.start_date.split("T")[0];
         }
         setClientsList(clients);
         console.log(clientsList);
@@ -187,6 +188,7 @@ function ClientList(props) {
         showMessage(err, "error");
       });
   }, []);
+
   const navigate = useNavigate();
   return (
     <div>
