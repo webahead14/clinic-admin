@@ -6,7 +6,6 @@ function fetchProtocols() {
       id: protocol.id,
       value: protocol.name,
     }));
-    console.log("op", options);
     return options;
   });
 }

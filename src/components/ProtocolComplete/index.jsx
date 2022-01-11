@@ -1,22 +1,18 @@
-import fetchProtocols from "../utils/allSurveys.js";
+import fetchProtocols from "../../utils/allSurveys.js";
 import { AutoComplete } from "antd";
 import React, { useState, useEffect } from "react";
 
 function Complete(props) {
   const [options, setOptions] = useState([]);
-  const [value, setValue] = useState(null);
+  // const [value, setValue] = useState("");
   useEffect(() => {
     fetchProtocols().then((data) => {
       setOptions(data);
     });
   }, []);
 
-  useEffect(() => {
-    props.updateData({ ...props.currentData, protocolId: value });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
   const onSelect = (data) => {
-    setValue(data);
+    props.updateData({ ...props.currentData, protocolId: data });
   };
   return (
     <AutoComplete
@@ -24,7 +20,7 @@ function Complete(props) {
         width: 200,
       }}
       options={options}
-      value={value}
+      value={props.currentData.protocolId}
       onSelect={onSelect}
       placeholder="Search for a protocol"
     />

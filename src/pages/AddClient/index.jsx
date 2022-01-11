@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Complete from "../../Complete";
+import Complete from "../../components/ProtocolComplete";
 import axios from "axios";
 import {
   Form,
