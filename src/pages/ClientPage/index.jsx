@@ -2,7 +2,10 @@ import style from "./style.module.css";
 import "./style.css";
 import axios from "axios";
 import React from "react";
-import { Card, Tabs, Descriptions, Divider, Collapse } from "antd";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
+
+import { Card, Tabs, Descriptions, Divider, Collapse, Button } from "antd";
 import {
   CloseCircleTwoTone,
   CheckCircleTwoTone,
@@ -13,15 +16,15 @@ const { Panel } = Collapse;
 
 const { TabPane } = Tabs;
 
-
-
 function ClientPage(props) {
+  const navigate = useNavigate();
+
   const [client, setClient] = React.useState({}); //this is for when we do the fetch from backend
+  const id = useParams().id;
   React.useEffect(() => {
     const token = localStorage.getItem("token");
-
     axios
-      .get("http://localhost:4000/api/clinic/client/1", {
+      .get(`http://localhost:4000/api/clinic/client/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,6 +41,10 @@ function ClientPage(props) {
   return JSON.stringify(client) !== "{}" ? (
     <div>
       <h1>ClientPage</h1>
+      <Button type="primary" onClick={() => navigate("/clients")}>
+        All Clients
+      </Button>
+
       <Card>
         <Descriptions title="Patient Info">
           <Descriptions.Item label="ID">{client.id}</Descriptions.Item>
@@ -84,43 +91,43 @@ function ClientPage(props) {
                 <Descriptions>
                   {client.surveyProgress
                     ? client.surveyProgress
-                      .map((element, idx) => {
-                        if (element.week === index + 1) {
-                          return (
-                            <Descriptions.Item key={idx}>
-                              <Collapse
-                                accordion="true"
-                                style={{ padding: "3px,16px" }}
-                                ghost
-                              >
-                                <Panel header={element.name}>
-                                  <div>
-                                    Has finished: &nbsp;
-                                    {element.isDone ? (
-                                      <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                    ) : element.isPartiallyDone ? (
-                                      <LoadingOutlined />
-                                    ) : (
-                                      <CloseCircleTwoTone twoToneColor="#fc6161" />
-                                    )}
-                                  </div>
-                                  <div>
-                                    Did not finish: &nbsp;
-                                    {element.hasMissed ? (
-                                      <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                    ) : (
-                                      <CloseCircleTwoTone twoToneColor="#fc6161" />
-                                    )}
-                                  </div>
-                                </Panel>
-                              </Collapse>
-                            </Descriptions.Item>
-                          );
-                        } else {
-                          return null;
-                        }
-                      })
-                      .filter((x) => x)
+                        .map((element, idx) => {
+                          if (element.week === index + 1) {
+                            return (
+                              <Descriptions.Item key={idx}>
+                                <Collapse
+                                  accordion="true"
+                                  style={{ padding: "3px,16px" }}
+                                  ghost
+                                >
+                                  <Panel header={element.name}>
+                                    <div>
+                                      Has finished: &nbsp;
+                                      {element.isDone ? (
+                                        <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                      ) : element.isPartiallyDone ? (
+                                        <LoadingOutlined />
+                                      ) : (
+                                        <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                      )}
+                                    </div>
+                                    <div>
+                                      Did not finish: &nbsp;
+                                      {element.hasMissed ? (
+                                        <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                      ) : (
+                                        <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                      )}
+                                    </div>
+                                  </Panel>
+                                </Collapse>
+                              </Descriptions.Item>
+                            );
+                          } else {
+                            return null;
+                          }
+                        })
+                        .filter((x) => x)
                     : null}
                 </Descriptions>
               </Element>
