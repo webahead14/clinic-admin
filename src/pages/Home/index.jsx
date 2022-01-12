@@ -29,20 +29,20 @@ const config = {
 function Home(props) {
   return (
     <div>
-      <div style={{ height: '28vh' }}>
+      <div style={{ height: "28vh" }}>
         <div style={{ textAlign: "center", fontSize: 30, paddingBottom: 20 }}>
           <h>Line Chart</h>
         </div>
         <Line {...config} />
       </div>
       <div style={{ display: "flex" }}>
-        <div style={{ width: 800, height: '40vh', padding: 100 }}>
+        <div style={{ width: "40vw", height: "40vh", padding: 100 }}>
           <div style={{ textAlign: "center", fontSize: 30 }}>
             <h>Pie Chart</h>
           </div>
           <DemoPie />{" "}
         </div>
-        <div style={{ width: 800, height: '40vh', padding: 100 }}>
+        <div style={{ width: "40vw", height: "40vh", padding: 100 }}>
           <div style={{ textAlign: "center", fontSize: 30, paddingBottom: 20 }}>
             <h>Bar Chart</h>
           </div>
