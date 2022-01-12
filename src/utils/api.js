@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const { REACT_APP_API_URL } = process.env;
+const REACT_APP_API_URL = `http://localhost:4000/api`;
 
 export function getProtocolsList() {
   return axios

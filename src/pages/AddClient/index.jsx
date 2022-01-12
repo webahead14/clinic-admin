@@ -104,7 +104,7 @@ function AddClient(props) {
           label="Choose a protocol"
           rules={[{ required: true, message: "Please choose a protocol!" }]}
         >
-          <Complete />
+          <Complete test="protocol" />
         </Form.Item>
 
         <Form.Item name="reminder" label="Reminder">

@@ -13,8 +13,6 @@ const { Panel } = Collapse;
 
 const { TabPane } = Tabs;
 
-
-
 function ClientPage(props) {
   const [client, setClient] = React.useState({}); //this is for when we do the fetch from backend
   React.useEffect(() => {
@@ -84,43 +82,43 @@ function ClientPage(props) {
                 <Descriptions>
                   {client.surveyProgress
                     ? client.surveyProgress
-                      .map((element, idx) => {
-                        if (element.week === index + 1) {
-                          return (
-                            <Descriptions.Item key={idx}>
-                              <Collapse
-                                accordion="true"
-                                style={{ padding: "3px,16px" }}
-                                ghost
-                              >
-                                <Panel header={element.name}>
-                                  <div>
-                                    Has finished: &nbsp;
-                                    {element.isDone ? (
-                                      <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                    ) : element.isPartiallyDone ? (
-                                      <LoadingOutlined />
-                                    ) : (
-                                      <CloseCircleTwoTone twoToneColor="#fc6161" />
-                                    )}
-                                  </div>
-                                  <div>
-                                    Did not finish: &nbsp;
-                                    {element.hasMissed ? (
-                                      <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                    ) : (
-                                      <CloseCircleTwoTone twoToneColor="#fc6161" />
-                                    )}
-                                  </div>
-                                </Panel>
-                              </Collapse>
-                            </Descriptions.Item>
-                          );
-                        } else {
-                          return null;
-                        }
-                      })
-                      .filter((x) => x)
+                        .map((element, idx) => {
+                          if (element.week === index + 1) {
+                            return (
+                              <Descriptions.Item key={idx}>
+                                <Collapse
+                                  accordion="true"
+                                  style={{ padding: "3px,16px" }}
+                                  ghost
+                                >
+                                  <Panel header={element.name}>
+                                    <div>
+                                      Has finished: &nbsp;
+                                      {element.isDone ? (
+                                        <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                      ) : element.isPartiallyDone ? (
+                                        <LoadingOutlined />
+                                      ) : (
+                                        <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                      )}
+                                    </div>
+                                    <div>
+                                      Did not finish: &nbsp;
+                                      {element.hasMissed ? (
+                                        <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                      ) : (
+                                        <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                      )}
+                                    </div>
+                                  </Panel>
+                                </Collapse>
+                              </Descriptions.Item>
+                            );
+                          } else {
+                            return null;
+                          }
+                        })
+                        .filter((x) => x)
                     : null}
                 </Descriptions>
               </Element>
