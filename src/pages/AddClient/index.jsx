@@ -1,7 +1,6 @@
-import style from "./style.module.css";
-import React, { useState } from "react";
-import Complete from "../../Complete";
-
+import React, { useState, useEffect } from "react";
+import Complete from "../../components/ProtocolComplete";
+import { postClient } from "../../utils/api";
 import {
   Form,
   Input,
@@ -11,6 +10,7 @@ import {
   Select,
   Button,
 } from "antd";
+import { showMessage } from "../../utils/functions";
 
 const { Option } = Select;
 
@@ -24,6 +24,30 @@ const prefixSelector = (
 );
 
 function AddClient(props) {
+  const [data, setData] = useState({
+    name: "",
+    passcode: "",
+    govId: "",
+    condition: "",
+    phone: "",
+    email: "",
+    gender: "",
+    protocolId: "",
+    startDate: "",
+    reminders: [],
+  });
+  const [reminder, setReminder] = useState({
+    reminder1: {},
+    reminder2: {},
+    reminder3: {},
+  });
+
+  useEffect(() => {
+    setData({
+      ...data,
+      reminders: [reminder.reminder1, reminder.reminder2, reminder.reminder3],
+    });
+  }, [reminder]);
   return (
     <div
       style={{
@@ -36,20 +60,52 @@ function AddClient(props) {
       <Form
         name="basicform"
         onFinishFailed={() => alert("Failed to submit")}
-        onFinish={() => alert("Form Submitted")}
-        initialValues={{ remember: true }}
+        onFinish={() => {
+          postClient(data)
+            .then((tr) => {
+              console.log(tr);
+              showMessage("client added", "success");
+            })
+            .catch((error) => {
+              const errorMessage = error.response.data.message;
+              if (
+                errorMessage ==
+                'duplicate key value violates unique constraint "clients_phone_key"'
+              ) {
+                showMessage("Phone number is already taken", "error");
+              } else if (
+                errorMessage ==
+                'duplicate key value violates unique constraint "clients_email_key"'
+              ) {
+                showMessage("Email is already taken", "error");
+              } else if (errorMessage == "client already exists") {
+                showMessage("Government id is already taken", "error");
+              }
+              console.log(error.response.data.message);
+              // showMessage(error.data, "error");
+            });
+        }}
       >
         <Form.Item
           label="Name"
           name="name"
+          onChange={(e) => setData({ ...data, name: e.target.value })}
           rules={[{ required: true, message: "Please enter a name" }]}
         >
           <Input />
         </Form.Item>
-
+        <Form.Item
+          label="Government Id"
+          name="GovId"
+          onChange={(e) => setData({ ...data, govId: e.target.value })}
+          rules={[{ required: true, message: "Please enter a name" }]}
+        >
+          <Input />
+        </Form.Item>
         <Form.Item
           label="Email"
           name="email"
+          onChange={(e) => setData({ ...data, email: e.target.value })}
           rules={[{ required: true, message: "Please enter an email" }]}
         >
           <Input />
@@ -58,6 +114,7 @@ function AddClient(props) {
         <Form.Item
           label="Passcode"
           name="password"
+          onChange={(e) => setData({ ...data, passcode: e.target.value })}
           rules={[{ required: true, message: "Please choose a password!" }]}
         >
           <Input.Password />
@@ -66,6 +123,7 @@ function AddClient(props) {
         <Form.Item
           name="Phone"
           label="Phone Number"
+          onChange={(e) => setData({ ...data, phone: e.target.value })}
           rules={[{ required: true, message: "Please insert a phone number!" }]}
         >
           <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
@@ -76,12 +134,23 @@ function AddClient(props) {
           name="condition"
           rules={[{ required: true, message: "Please enter a condition" }]}
         >
-          <Input />
+          <Input
+            onChange={(e) => setData({ ...data, condition: e.target.value })}
+          />
         </Form.Item>
 
         <Form.Item
           name="gender"
           label="Gender"
+          onChange={(e) => {
+            if (e.target.value == 1) {
+              setData({ ...data, gender: "male" });
+            } else if (e.target.value == 2) {
+              setData({ ...data, gender: "female" });
+            } else {
+              setData({ ...data, gender: "other" });
+            }
+          }}
           rules={[{ required: true, message: "Please select a gender!" }]}
         >
           <Radio.Group name="radiogroup" defaultValue={1}>
@@ -92,23 +161,44 @@ function AddClient(props) {
         </Form.Item>
 
         <Form.Item
-          name="Date"
+          name="startDate"
           label="Start Date"
           rules={[{ required: true, message: "Please choose a date!" }]}
         >
-          <DatePicker />
+          <DatePicker
+            onChange={(e, dateString) =>
+              setData({ ...data, startDate: dateString })
+            }
+          />
         </Form.Item>
 
-        <Form.Item
-          name="protocol"
-          label="Choose a protocol"
-          rules={[{ required: true, message: "Please choose a protocol!" }]}
-        >
-          <Complete test="protocol" />
+        <Form.Item name="protocol" label="Choose a protocol">
+          <Complete
+            updateData={setData}
+            currentData={data}
+            rules={[{ required: true, message: "Please choose a protocol!" }]}
+          />
         </Form.Item>
 
         <Form.Item name="reminder" label="Reminder">
-          <TimePicker /> <TimePicker /> <TimePicker />
+          <TimePicker
+            onChange={(e, dateString) => {
+              const obj = { time: dateString, has_sent: false };
+              setReminder({ ...reminder, reminder1: obj });
+            }}
+          />{" "}
+          <TimePicker
+            onChange={(e, dateString) => {
+              const obj = { time: dateString, has_sent: false };
+              setReminder({ ...reminder, reminder2: obj });
+            }}
+          />{" "}
+          <TimePicker
+            onChange={(e, dateString) => {
+              const obj = { time: dateString, has_sent: false };
+              setReminder({ ...reminder, reminder3: obj });
+            }}
+          />
         </Form.Item>
 
         <Form.Item>
