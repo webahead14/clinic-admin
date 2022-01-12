@@ -7,6 +7,7 @@ import {
   ApartmentOutlined,
   TeamOutlined,
   FileOutlined,
+  UserOutlined,
   FundOutlined,
 } from "@ant-design/icons";
 
@@ -17,7 +18,6 @@ import ProtocolList from "./pages/ProtocolList";
 import SurveyList from "./pages/SurveyList";
 import AddClient from "./pages/AddClient";
 import AddProtocol from "./pages/AddProtocol";
-
 import ClientPage from "./pages/ClientPage";
 import ProtocolPage from "./pages/ProtocolPage";
 

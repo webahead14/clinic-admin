@@ -1,8 +1,8 @@
-import style from './style.module.css';
-import { Table, Button } from 'antd';
-import { useEffect, useState } from 'react';
-import { getProtocolsList } from '../../utils/api';
-import { showError } from '../../utils/functions';
+import style from "./style.module.css";
+import { Table, Button } from "antd";
+import { useEffect, useState } from "react";
+import { getProtocolsList } from "../../utils/api";
+import { showMessage } from "../../utils/functions";
 import { useNavigate } from "react-router-dom";
 
 const columns = [
@@ -46,7 +46,7 @@ function ProtocolList() {
       })
       .catch((err) => {
         console.error(err);
-        showError(err);
+        showMessage(err, "error");
       });
   }, []);
 
@@ -61,7 +61,7 @@ function ProtocolList() {
       <Table
         dataSource={protocolList}
         columns={columns}
-      // pagination={{ pageSize: 5 }}
+        // pagination={{ pageSize: 5 }}
       />
       ;
     </div>
