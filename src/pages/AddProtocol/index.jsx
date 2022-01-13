@@ -4,7 +4,6 @@ import { Collapse, Select, Button } from "antd";
 import { useState, useEffect } from "react";
 import Complete from "../../Complete";
 import { useNavigate } from "react-router-dom";
-import options from "../../utils/allSurveys";
 import axios from "axios";
 
 function AddProtocol(props) {
@@ -17,6 +16,17 @@ function AddProtocol(props) {
   const [highlighted, setHighlighted] = useState([]);
 
   const { Option } = Select;
+
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    axios(`http://localhost:4000/api/clinic/surveys`).then(({ data }) => {
+      let formattedOptions = data.surveys.map((survey) => {
+        return { id: survey.id, value: survey.name };
+      });
+      setOptions(formattedOptions);
+    });
+  }, []);
 
   //filtering for whatever survey is selected and indicating which week it's in
   function handleChange(value) {
