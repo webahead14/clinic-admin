@@ -2,9 +2,11 @@ import style from "./style.module.css";
 import "./style.css";
 import { Collapse, Select, Button } from "antd";
 import { useState, useEffect } from "react";
-import Complete from "../../Complete";
+import Complete from "../../components/Complete";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+const { REACT_APP_API_URL } = process.env;
 
 function AddProtocol(props) {
   const [addWeek, setAddWeek] = useState([{ week: 1, surveys: [] }]);
@@ -20,7 +22,7 @@ function AddProtocol(props) {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    axios(`http://localhost:4000/api/clinic/surveys`).then(({ data }) => {
+    axios(`${REACT_APP_API_URL}/api/clinic/surveys`).then(({ data }) => {
       let formattedOptions = data.surveys.map((survey) => {
         return { id: survey.id, value: survey.name };
       });
@@ -57,10 +59,10 @@ function AddProtocol(props) {
     event.preventDefault();
     const data = { name: protocolData.protocolName, protocolData: addWeek };
     axios
-      .post("http://localhost:4000/api/clinic/protocol/add", data)
+      .post(`${REACT_APP_API_URL}/api/clinic/protocol/add`, data)
       .then((response) => {
-        if (response.success) {
-          goTo("/");
+        if (response.status === "success") {
+          goTo("/protocols");
         }
       });
   };

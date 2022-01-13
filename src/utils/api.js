@@ -1,21 +1,21 @@
 import axios from "axios";
 
-const REACT_APP_API_URL = `http://localhost:4000/api`;
+const { REACT_APP_API_URL } = process.env;
 
 export function getProtocolsList() {
   return axios
-    .get(`${REACT_APP_API_URL}/clinic/protocols`)
+    .get(`${REACT_APP_API_URL}/api/clinic/protocols`)
     .then((res) => res.data.protocols);
 }
 
 export function getSurveysList() {
   return axios
-    .get(`${REACT_APP_API_URL}/clinic/surveys`)
+    .get(`${REACT_APP_API_URL}/api/clinic/surveys`)
     .then((res) => res.data.surveys);
 }
 
 export function fetchProtocols() {
-  return axios.get(`${REACT_APP_API_URL}/clinic/protocols`).then((res) => {
+  return axios.get(`${REACT_APP_API_URL}/api/clinic/protocols`).then((res) => {
     const options = res.data.protocols.map((protocol) => ({
       label: protocol.name,
       value: protocol.id,

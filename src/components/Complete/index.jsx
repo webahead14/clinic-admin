@@ -1,10 +1,27 @@
-import options from "../../utils/allSurverys";
 import { AutoComplete } from "antd";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+const { REACT_APP_API_URL } = process.env;
 
 function Complete(props) {
   // adds the survey selected for each week, unique to the week id
 
   // const [surveyOptions, setSurveyOptions] = useState([]);
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    axios(`${REACT_APP_API_URL}/api/clinic/surveys`).then(({ data }) => {
+      let formattedOptions = data.surveys.map((survey) => {
+        return { id: survey.id, value: survey.name };
+      });
+      setOptions(formattedOptions);
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(options);
+  }, [options]);
 
   const onSelect = (surveyName) => {
     props.setAddWeek((prevWeeks) => {
