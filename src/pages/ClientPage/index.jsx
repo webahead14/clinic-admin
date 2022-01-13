@@ -18,13 +18,14 @@ const { TabPane } = Tabs;
 
 function ClientPage(props) {
   const navigate = useNavigate();
+  const { REACT_APP_API_URL } = process.env;
 
   const [client, setClient] = React.useState({}); //this is for when we do the fetch from backend
   const id = useParams().id;
   React.useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`http://localhost:4000/api/clinic/client/${id}`, {
+      .get(`${REACT_APP_API_URL + id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

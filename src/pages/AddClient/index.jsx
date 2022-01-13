@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Complete from "../../components/ProtocolComplete";
 import { postClient } from "../../utils/api";
-import "./style.css";
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
 
 import {
   Form,
