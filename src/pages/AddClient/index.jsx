@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Complete from "../../components/ProtocolComplete";
 import { postClient } from "../../utils/api";
+import { useNavigate } from "react-router-dom";
+
 import {
   Form,
   Input,
@@ -24,6 +26,10 @@ const prefixSelector = (
 );
 
 function AddClient(props) {
+  const format = "HH:mm";
+
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
     name: "",
     passcode: "",
@@ -65,6 +71,7 @@ function AddClient(props) {
             .then((tr) => {
               console.log(tr);
               showMessage("client added", "success");
+              navigate("/clients");
             })
             .catch((error) => {
               const errorMessage = error.response.data.message;
@@ -182,18 +189,21 @@ function AddClient(props) {
 
         <Form.Item name="reminder" label="Reminder">
           <TimePicker
+            format={format}
             onChange={(e, dateString) => {
               const obj = { time: dateString, has_sent: false };
               setReminder({ ...reminder, reminder1: obj });
             }}
           />{" "}
           <TimePicker
+            format={format}
             onChange={(e, dateString) => {
               const obj = { time: dateString, has_sent: false };
               setReminder({ ...reminder, reminder2: obj });
             }}
           />{" "}
           <TimePicker
+            format={format}
             onChange={(e, dateString) => {
               const obj = { time: dateString, has_sent: false };
               setReminder({ ...reminder, reminder3: obj });
