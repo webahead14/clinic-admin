@@ -60,8 +60,8 @@ function AddProtocol(props) {
     const data = { name: protocolData.protocolName, protocolData: addWeek };
     axios
       .post(`${REACT_APP_API_URL}/api/clinic/protocol/add`, data)
-      .then((response) => {
-        if (response.status === "success") {
+      .then(({ data }) => {
+        if (data.status === "success") {
           goTo("/protocols");
         }
       });
