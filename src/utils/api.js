@@ -7,6 +7,9 @@ export function getProtocolsList() {
     .get(`${REACT_APP_API_URL}/api/clinic/protocols`)
     .then((res) => res.data.protocols);
 }
+export function getClientsList() {
+  return axios.get(`${REACT_APP_API_URL}/api/clients`).then((res) => res.data);
+}
 
 export function getSurveysList() {
   return axios

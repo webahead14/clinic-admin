@@ -2,7 +2,10 @@ import style from "./style.module.css";
 import "./style.css";
 import axios from "axios";
 import React from "react";
-import { Card, Tabs, Descriptions, Divider, Collapse } from "antd";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
+
+import { Card, Tabs, Descriptions, Divider, Collapse, Button } from "antd";
 import {
   CloseCircleTwoTone,
   CheckCircleTwoTone,
@@ -14,12 +17,15 @@ const { Panel } = Collapse;
 const { TabPane } = Tabs;
 
 function ClientPage(props) {
+  const navigate = useNavigate();
+  const { REACT_APP_API_URL } = process.env;
+
   const [client, setClient] = React.useState({}); //this is for when we do the fetch from backend
+  const id = useParams().id;
   React.useEffect(() => {
     const token = localStorage.getItem("token");
-
     axios
-      .get("http://localhost:4000/api/clinic/client/1", {
+      .get(`${REACT_APP_API_URL + id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,6 +42,10 @@ function ClientPage(props) {
   return JSON.stringify(client) !== "{}" ? (
     <div>
       <h1>ClientPage</h1>
+      <Button type="primary" onClick={() => navigate("/clients")}>
+        All Clients
+      </Button>
+
       <Card>
         <Descriptions title="Patient Info">
           <Descriptions.Item label="ID">{client.id}</Descriptions.Item>
