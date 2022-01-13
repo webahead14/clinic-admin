@@ -2,3 +2,8 @@
   position: absolute;
   margin-bottom: 1%;
 }
+.ant-btn-danger {
+  position: absolute;
+  width: 30%;
+  padding: 0px;
+}
