@@ -65,7 +65,10 @@ function AddClient(props) {
       <h4>Add a client</h4>
       <Form
         name="basicform"
-        onFinishFailed={() => alert("Failed to submit")}
+        onFinishFailed={(e) => {
+          console.log(e);
+          alert("Failed to submit");
+        }}
         onFinish={() => {
           postClient(data)
             .then((tr) => {
