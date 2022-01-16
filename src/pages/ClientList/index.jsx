@@ -217,7 +217,6 @@ function ClientList(props) {
           dataSource={clientsList}
           columns={columns}
         />
-        ;
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ const columns = [
     key: "name",
   },
   {
-    title: "Surveys Amount",
+    title: "Number of Surveys",
     dataIndex: "surveysAmount",
     key: "surveysAmount",
   },
@@ -63,7 +63,6 @@ function ProtocolList() {
         columns={columns}
         // pagination={{ pageSize: 5 }}
       />
-      ;
     </div>
   );
 }

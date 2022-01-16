@@ -1,11 +1,11 @@
-import style from './style.module.css'
+// import style from './style.module.css'
 
 function ProtocolPage(props) {
-    return (
-        <div>
-            <h1>ProtocolPage</h1>
-        </div>
-    )
+  return (
+    <div>
+      <h1>ProtocolPage</h1>
+    </div>
+  );
 }
 
-export default ProtocolPage
+export default ProtocolPage;

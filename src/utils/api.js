@@ -28,7 +28,7 @@ export function fetchProtocols() {
 }
 
 export function postClient(data) {
-  if (data.protocolId == "") {
+  if (data.protocolId === "") {
     throw new Error("Please Choose A Protocol");
   } else {
     alert("Form Submitted");

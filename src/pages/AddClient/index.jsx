@@ -79,16 +79,16 @@ function AddClient(props) {
             .catch((error) => {
               const errorMessage = error.response.data.message;
               if (
-                errorMessage ==
+                errorMessage ===
                 'duplicate key value violates unique constraint "clients_phone_key"'
               ) {
                 showMessage("Phone number is already taken", "error");
               } else if (
-                errorMessage ==
+                errorMessage ===
                 'duplicate key value violates unique constraint "clients_email_key"'
               ) {
                 showMessage("Email is already taken", "error");
-              } else if (errorMessage == "client already exists") {
+              } else if (errorMessage === "client already exists") {
                 showMessage("Government id is already taken", "error");
               }
               console.log(error.response.data.message);
@@ -153,9 +153,9 @@ function AddClient(props) {
           name="gender"
           label="Gender"
           onChange={(e) => {
-            if (e.target.value == 1) {
+            if (e.target.value === 1) {
               setData({ ...data, gender: "male" });
-            } else if (e.target.value == 2) {
+            } else if (e.target.value === 2) {
               setData({ ...data, gender: "female" });
             } else {
               setData({ ...data, gender: "other" });
