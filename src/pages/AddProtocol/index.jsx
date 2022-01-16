@@ -1,10 +1,12 @@
 import style from "./style.module.css";
 import "./style.css";
 import { Collapse, Select, Button } from "antd";
-import { useState } from "react";
-import Complete from "../../Complete";
+import { useState, useEffect } from "react";
+import Complete from "../../components/Complete";
 import { useNavigate } from "react-router-dom";
-import options from "../../utils/allSurveys";
+import axios from "axios";
+
+const { REACT_APP_API_URL } = process.env;
 
 function AddProtocol(props) {
   const [addWeek, setAddWeek] = useState([{ week: 1, surveys: [] }]);
@@ -16,6 +18,17 @@ function AddProtocol(props) {
   const [highlighted, setHighlighted] = useState([]);
 
   const { Option } = Select;
+
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    axios(`${REACT_APP_API_URL}/api/clinic/surveys`).then(({ data }) => {
+      let formattedOptions = data.surveys.map((survey) => {
+        return { id: survey.id, value: survey.name };
+      });
+      setOptions(formattedOptions);
+    });
+  }, []);
 
   //filtering for whatever survey is selected and indicating which week it's in
   function handleChange(value) {
@@ -44,8 +57,19 @@ function AddProtocol(props) {
   //redirects when user clicks Submit
   const onSubmit = (event) => {
     event.preventDefault();
-    goTo("/");
+    const data = { name: protocolData.protocolName, protocolData: addWeek };
+    axios
+      .post(`${REACT_APP_API_URL}/api/clinic/protocol/add`, data)
+      .then(({ data }) => {
+        if (data.status === "success") {
+          goTo("/protocols");
+        }
+      });
   };
+
+  useEffect(() => {
+    console.log(addWeek);
+  }, [addWeek]);
   return (
     <div className={style.addProtocol}>
       <div className={style.addProtocolTitle}>

@@ -1,36 +1,12 @@
 import style from "./style.module.css";
-import { Table, Button } from "antd";
+import { Button, Input, Table } from "antd";
 import { useNavigate } from "react-router-dom";
+import { SearchOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
+import { showMessage } from "../../utils/functions";
 
-const dataSource = [
-  {
-    id: 1,
-    name: "George btata",
-    phone: "052-508-5555",
-    "start date": "16-01-2021",
-    "treatment status": "on-going",
-    protocol: "Protocol X",
-    condition: "PTSD",
-  },
-  {
-    id: 1,
-    name: "Mario Saliba",
-    phone: "052-508-5555",
-    "start date": "16-12-2021",
-    "treatment status": "Completed",
-    protocol: "SS GG",
-    condition: "Stress!",
-  },
-  {
-    id: 1,
-    name: "Nur Awad",
-    phone: "052-228-5555",
-    "start date": "10-12-2021",
-    "treatment status": "on-going",
-    protocol: "Awesomeness",
-    condition: "Uno Queen",
-  },
-];
+import "./style.css";
+import { getClientsList } from "../../utils/api";
 
 const columns = [
   {
@@ -42,6 +18,47 @@ const columns = [
     title: "Name",
     dataIndex: "name",
     key: "name",
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => {
+      return (
+        <>
+          <Input
+            autoFocus
+            placeholder="Type text here"
+            value={selectedKeys[0]}
+            onChange={(e) => {
+              setSelectedKeys(e.target.value ? [e.target.value] : []);
+              confirm({ closeDropdown: false });
+            }}
+            onPressEnter={() => {
+              confirm();
+            }}
+            onBlur={() => {
+              confirm();
+            }}
+          ></Input>
+
+          <Button
+            onClick={() => {
+              clearFilters();
+            }}
+            type="danger"
+          >
+            Reset
+          </Button>
+        </>
+      );
+    },
+    filterIcon: () => {
+      return <SearchOutlined />;
+    },
+    onFilter: (value, record) => {
+      return record.name.toLowerCase().includes(value.toLowerCase());
+    },
   },
   {
     title: "phone",
@@ -49,29 +66,129 @@ const columns = [
     key: "phone",
   },
   {
-    title: "start date",
-    dataIndex: "start date",
+    title: "Start date",
+    dataIndex: "startDate",
     key: "start date",
   },
   {
-    title: "treatment status",
-    dataIndex: "treatment status",
-    key: "treatment status",
+    title: "status",
+    dataIndex: "status",
+    key: "status",
   },
   {
     title: "protocol",
     dataIndex: "protocol",
     key: "protocol",
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => {
+      return (
+        <>
+          <Input
+            autoFocus
+            placeholder="Type text here"
+            value={selectedKeys[0]}
+            onChange={(e) => {
+              setSelectedKeys(e.target.value ? [e.target.value] : []);
+              confirm({ closeDropdown: false });
+            }}
+            onPressEnter={() => {
+              confirm();
+            }}
+            onBlur={() => {
+              confirm();
+            }}
+          ></Input>
+
+          <Button
+            onClick={() => {
+              clearFilters();
+            }}
+            type="danger"
+          >
+            Reset
+          </Button>
+        </>
+      );
+    },
+    filterIcon: () => {
+      return <SearchOutlined />;
+    },
+    onFilter: (value, record) => {
+      return record.protocol.toLowerCase().includes(value.toLowerCase());
+    },
   },
 
   {
     title: "condition",
     dataIndex: "condition",
     key: "condition",
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => {
+      return (
+        <>
+          <Input
+            autoFocus
+            placeholder="Type text here"
+            value={selectedKeys[0]}
+            onChange={(e) => {
+              setSelectedKeys(e.target.value ? [e.target.value] : []);
+              confirm({ closeDropdown: false });
+            }}
+            onPressEnter={() => {
+              confirm();
+            }}
+            onBlur={() => {
+              confirm();
+            }}
+          ></Input>
+
+          <Button
+            onClick={() => {
+              clearFilters();
+            }}
+            type="danger"
+          >
+            Reset
+          </Button>
+        </>
+      );
+    },
+    filterIcon: () => {
+      return <SearchOutlined />;
+    },
+    onFilter: (value, record) => {
+      return record.condition.toLowerCase().includes(value.toLowerCase());
+    },
   },
 ];
 
 function ClientList(props) {
+  const [clientsList, setClientsList] = useState([]);
+
+  useEffect(() => {
+    getClientsList()
+      .then((clients) => {
+        for (const client of clients) {
+          client.key = client.id;
+          client.startDate = client.start_date.split("T")[0];
+        }
+        setClientsList(clients);
+        console.log(clientsList);
+      })
+      .catch((err) => {
+        console.error(err);
+        showMessage(err, "error");
+      });
+  }, []);
+
   const navigate = useNavigate();
   return (
     <div>
@@ -89,7 +206,18 @@ function ClientList(props) {
             Add Client
           </Button>
         </div>
-        <Table dataSource={dataSource} columns={columns} />;
+        <Table
+          onRow={(record) => {
+            return {
+              onClick: () => {
+                navigate(`/client/${record.id}`);
+              },
+            };
+          }}
+          dataSource={clientsList}
+          columns={columns}
+        />
+        ;
       </div>
     </div>
   );

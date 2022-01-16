@@ -1,4 +1,3 @@
-
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
@@ -9,6 +8,7 @@ import {
   TeamOutlined,
   FileOutlined,
   UserOutlined,
+  FundOutlined,
 } from "@ant-design/icons";
 
 import Login from "./pages/Login";
@@ -18,7 +18,6 @@ import ProtocolList from "./pages/ProtocolList";
 import SurveyList from "./pages/SurveyList";
 import AddClient from "./pages/AddClient";
 import AddProtocol from "./pages/AddProtocol";
-
 import ClientPage from "./pages/ClientPage";
 import ProtocolPage from "./pages/ProtocolPage";
 
@@ -37,7 +36,7 @@ function App() {
   //       res.data <- no need to JSON.parse the response
   //     })
   //     .catch()
-
+  //
   //   axios.post(url, { body: {} }) <- no need to JSON.stringify the body
   //     .then((res) => {
   //       res.data
@@ -70,6 +69,14 @@ function App() {
           <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
             <Menu.Item
               key="1"
+              onClick={() => navigate("/")}
+              icon={<FundOutlined />}
+              style={{ marginTop: 0 }}
+            >
+              Dashboard
+            </Menu.Item>
+            <Menu.Item
+              key="2"
               onClick={() => navigate("/clients")}
               icon={<TeamOutlined />}
               style={{ marginTop: 0 }}
@@ -77,27 +84,19 @@ function App() {
               Client list
             </Menu.Item>
             <Menu.Item
-              key="2"
+              key="3"
               onClick={() => navigate("/protocols")}
               icon={<ApartmentOutlined />}
             >
               Protocol list
             </Menu.Item>
             <Menu.Item
-              key="3"
+              key="4"
               onClick={() => navigate("/surveys")}
               icon={<FileOutlined />}
             >
               Survey list
             </Menu.Item>
-            <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-              <Menu.Item key="4">Bill</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
-            </SubMenu>
           </Menu>
         </Sider>
         <Content style={{ margin: "0 16px" }}>
