@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Complete from "../../components/ProtocolComplete";
 import { postClient } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
+import style from "./style.module.css";
+import "./style.css";
 
 import {
   Form,
@@ -55,14 +57,8 @@ function AddClient(props) {
     });
   }, [reminder]);
   return (
-    <div
-      style={{
-        display: "block",
-        width: 700,
-        padding: 30,
-      }}
-    >
-      <h4>Add a client</h4>
+    <div className={style.addClientForm}>
+      <h1 className={style.addClientTitle}>Add a Client</h1>
       <Form
         name="basicform"
         onFinishFailed={(e) => {
@@ -213,9 +209,9 @@ function AddClient(props) {
             }}
           />
         </Form.Item>
-
+        <br />
         <Form.Item>
-          <Button type="success" htmlType="submit">
+          <Button type="primary" htmlType="submit">
             Add
           </Button>
         </Form.Item>

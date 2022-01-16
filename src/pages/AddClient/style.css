@@ -1,4 +1,68 @@
-.ant-btn ant-btn-primary {
+.ant-btn {
+  display: flex !important;
+  margin: 0 auto;
+  transform: scale(1.5);
+}
+
+.ant-form-horizontal {
+  background: white;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 25px;
+  padding: 35px !important;
+  padding-left: 50px !important;
+  padding-right: 20px !important;
+}
+
+.ant-form-item-label > label {
+  width: 165px;
+  font-size: 20px !important;
+}
+
+.ant-picker-input > input {
+  font-size: 20px !important;
+  width: 100px !important;
+}
+
+.ant-input {
+  width: 400px !important;
+  font-size: 20px !important;
+}
+
+.ant-input-affix-wrapper {
+  width: 150px !important;
+  padding: 4px 10px 4px 11px !important;
+}
+
+#basicform_Phone {
+  width: 210px !important;
+}
+
+.ant-select-selector {
+  width: 209px !important;
+  font-size: 20px !important;
+  height: 40px !important;
+  padding: 4px 11px 4px !important;
+}
+
+.ant-select-show-search {
+  width: 208px !important;
+}
+
+.ant-select-arrow {
+  right: 3px !important;
+}
+
+.ant-form label {
+  font-size: 19px !important;
+}
+
+.ant-picker {
+  width: 198px !important;
+}
+
+.ant-btn-sm {
+  font-size: 12px !important;
+  margin-top: 6px;
 }
