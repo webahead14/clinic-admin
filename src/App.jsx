@@ -100,7 +100,7 @@ function App() {
           </Menu>
         </Sider>
         <Content style={{ margin: "0 16px" }}>
-          <div style={{ padding: 24, minHeight: 360 }}>
+          <div style={{ paddingTop: "10px", minHeight: 360 }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/clients" element={<ClientList />} />
