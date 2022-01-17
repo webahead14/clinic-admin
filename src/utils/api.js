@@ -31,7 +31,6 @@ export function postClient(data) {
   if (data.protocolId === "") {
     throw new Error("Please Choose A Protocol");
   } else {
-    alert("Form Submitted");
     return axios.post(`${REACT_APP_API_URL}/api/client/register`, data);
   }
 }

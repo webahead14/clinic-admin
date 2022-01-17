@@ -25,7 +25,7 @@ function ClientPage(props) {
   React.useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${REACT_APP_API_URL + id}`, {
+      .get(`${REACT_APP_API_URL}/api/clinic/client/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -92,43 +92,43 @@ function ClientPage(props) {
                 <Descriptions>
                   {client.surveyProgress
                     ? client.surveyProgress
-                        .map((element, idx) => {
-                          if (element.week === index + 1) {
-                            return (
-                              <Descriptions.Item key={idx}>
-                                <Collapse
-                                  accordion="true"
-                                  style={{ padding: "3px,16px" }}
-                                  ghost
-                                >
-                                  <Panel header={element.name}>
-                                    <div>
-                                      Has finished: &nbsp;
-                                      {element.isDone ? (
-                                        <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                      ) : element.isPartiallyDone ? (
-                                        <LoadingOutlined />
-                                      ) : (
-                                        <CloseCircleTwoTone twoToneColor="#fc6161" />
-                                      )}
-                                    </div>
-                                    <div>
-                                      Did not finish: &nbsp;
-                                      {element.hasMissed ? (
-                                        <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                      ) : (
-                                        <CloseCircleTwoTone twoToneColor="#fc6161" />
-                                      )}
-                                    </div>
-                                  </Panel>
-                                </Collapse>
-                              </Descriptions.Item>
-                            );
-                          } else {
-                            return null;
-                          }
-                        })
-                        .filter((x) => x)
+                      .map((element, idx) => {
+                        if (element.week === index + 1) {
+                          return (
+                            <Descriptions.Item key={idx}>
+                              <Collapse
+                                accordion="true"
+                                style={{ padding: "3px,16px" }}
+                                ghost
+                              >
+                                <Panel header={element.name}>
+                                  <div>
+                                    Has finished: &nbsp;
+                                    {element.isDone ? (
+                                      <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                    ) : element.isPartiallyDone ? (
+                                      <LoadingOutlined />
+                                    ) : (
+                                      <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                    )}
+                                  </div>
+                                  <div>
+                                    Did not finish: &nbsp;
+                                    {element.hasMissed ? (
+                                      <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                    ) : (
+                                      <CloseCircleTwoTone twoToneColor="#fc6161" />
+                                    )}
+                                  </div>
+                                </Panel>
+                              </Collapse>
+                            </Descriptions.Item>
+                          );
+                        } else {
+                          return null;
+                        }
+                      })
+                      .filter((x) => x)
                     : null}
                 </Descriptions>
               </Element>

@@ -39,7 +39,7 @@ function AddClient(props) {
     condition: "",
     phone: "",
     email: "",
-    gender: "",
+    gender: 1,
     protocolId: "",
     startDate: "",
     reminders: [],
@@ -56,6 +56,7 @@ function AddClient(props) {
       reminders: [reminder.reminder1, reminder.reminder2, reminder.reminder3],
     });
   }, [reminder]);
+
   return (
     <div className={style.addClientForm}>
       <h1 className={style.addClientTitle}>Add a Client</h1>
@@ -63,12 +64,13 @@ function AddClient(props) {
         name="basicform"
         onFinishFailed={(e) => {
           console.log(e);
-          alert("Failed to submit");
+          showMessage("Failed to submit", "error");
         }}
+        initialValues={data}
+
         onFinish={() => {
           postClient(data)
             .then((tr) => {
-              console.log(tr);
               showMessage("client added", "success");
               navigate("/clients");
             })
@@ -87,8 +89,6 @@ function AddClient(props) {
               } else if (errorMessage === "client already exists") {
                 showMessage("Government id is already taken", "error");
               }
-              console.log(error.response.data.message);
-              // showMessage(error.data, "error");
             });
         }}
       >
@@ -148,18 +148,22 @@ function AddClient(props) {
         <Form.Item
           name="gender"
           label="Gender"
-          onChange={(e) => {
-            if (e.target.value === 1) {
-              setData({ ...data, gender: "male" });
-            } else if (e.target.value === 2) {
-              setData({ ...data, gender: "female" });
-            } else {
-              setData({ ...data, gender: "other" });
-            }
-          }}
           rules={[{ required: true, message: "Please select a gender!" }]}
         >
-          <Radio.Group name="radiogroup" defaultValue={1}>
+          <Radio.Group
+            name="radiogroup"
+            defaultValue={1}
+            onChange={(e) => {
+              if (e.target.value === 1) {
+                setData({ ...data, gender: "male" });
+              } else if (e.target.value === 2) {
+                setData({ ...data, gender: "female" });
+              } else {
+                setData({ ...data, gender: "other" });
+              }
+            }}
+            value={data.gender}
+          >
             <Radio value={1}>Male</Radio>
             <Radio value={2}>Female</Radio>
             <Radio value={3}>Other</Radio>

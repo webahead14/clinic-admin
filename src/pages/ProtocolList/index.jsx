@@ -53,15 +53,14 @@ function ProtocolList() {
   return (
     <div className={style.protocolList}>
       <h1 className={style.title}>Protocol list</h1>
-      <div style={{ paddingBottom: 10 }}>
-        <Button type="primary" onClick={() => navigate("/add/protocol")}>
-          Add Protocol
-        </Button>
-      </div>
+      <Button type="primary" onClick={() => navigate("/add/protocol")}>
+        Add Protocol
+      </Button>
+      <br /><br />
       <Table
         dataSource={protocolList}
         columns={columns}
-        // pagination={{ pageSize: 5 }}
+      // pagination={{ pageSize: 5 }}
       />
     </div>
   );

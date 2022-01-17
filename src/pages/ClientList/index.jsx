@@ -1,11 +1,9 @@
-import style from "./style.module.css";
-import { Button, Input, Table } from "antd";
+import { Button, Input, Table, Space } from "antd";
 import { useNavigate } from "react-router-dom";
 import { SearchOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { showMessage } from "../../utils/functions";
 
-import "./style.css";
 import { getClientsList } from "../../utils/api";
 
 const columns = [
@@ -192,32 +190,24 @@ function ClientList(props) {
   const navigate = useNavigate();
   return (
     <div>
-      <div
-        style={{
-          display: "block",
-          width: "100%",
+      <h1 style={{ textAlign: "center", paddingBottom: 20, fontSize: 40 }}>
+        Client list
+      </h1>
+      <Button type="primary" onClick={() => navigate("/add/client")}>
+        Add Client
+      </Button>
+      <br /><br />
+      <Table
+        onRow={(record) => {
+          return {
+            onClick: () => {
+              navigate(`/client/${record.id}`);
+            },
+          };
         }}
-      >
-        <h1 style={{ textAlign: "center", paddingBottom: 20, fontSize: 40 }}>
-          Client list
-        </h1>
-        <div style={{ paddingBottom: 10 }}>
-          <Button type="primary" onClick={() => navigate("/add/client")}>
-            Add Client
-          </Button>
-        </div>
-        <Table
-          onRow={(record) => {
-            return {
-              onClick: () => {
-                navigate(`/client/${record.id}`);
-              },
-            };
-          }}
-          dataSource={clientsList}
-          columns={columns}
-        />
-      </div>
+        dataSource={clientsList}
+        columns={columns}
+      />
     </div>
   );
 }

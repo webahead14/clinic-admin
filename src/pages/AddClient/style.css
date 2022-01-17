@@ -1,9 +1,3 @@
-.ant-btn {
-  display: flex !important;
-  margin: 0 auto;
-  transform: scale(1.5);
-}
-
 .ant-form-horizontal {
   background: white;
   display: flex;
