@@ -7,3 +7,9 @@
   top: 0;
   z-index: 100;
 }
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 5%;
+}

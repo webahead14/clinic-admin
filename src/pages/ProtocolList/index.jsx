@@ -22,14 +22,9 @@ const columns = [
     key: "surveysAmount",
   },
   {
-    title: "Date",
+    title: "Date Created",
     dataIndex: "date",
     key: "date",
-  },
-  {
-    title: "Condition",
-    dataIndex: "condition",
-    key: "condition",
   },
 ];
 
@@ -54,13 +49,14 @@ function ProtocolList() {
     <div className={style.protocolList}>
       <h1 className={style.title}>Protocol list</h1>
       <Button type="primary" onClick={() => navigate("/add/protocol")}>
-        Add Protocol
+        Add a Protocol
       </Button>
-      <br /><br />
+      <br />
+      <br />
       <Table
         dataSource={protocolList}
         columns={columns}
-      // pagination={{ pageSize: 5 }}
+        // pagination={{ pageSize: 5 }}
       />
     </div>
   );

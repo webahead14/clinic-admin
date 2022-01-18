@@ -8,7 +8,7 @@ import { getClientsList } from "../../utils/api";
 
 const columns = [
   {
-    title: "id",
+    title: "ID",
     dataIndex: "id",
     key: "id",
   },
@@ -59,22 +59,22 @@ const columns = [
     },
   },
   {
-    title: "phone",
+    title: "Phone Number",
     dataIndex: "phone",
     key: "phone",
   },
   {
-    title: "Start date",
+    title: "Start Date",
     dataIndex: "startDate",
     key: "start date",
   },
   {
-    title: "status",
+    title: "Status",
     dataIndex: "status",
     key: "status",
   },
   {
-    title: "protocol",
+    title: "Protocol",
     dataIndex: "protocol",
     key: "protocol",
     filterDropdown: ({
@@ -121,7 +121,7 @@ const columns = [
   },
 
   {
-    title: "condition",
+    title: "Condition",
     dataIndex: "condition",
     key: "condition",
     filterDropdown: ({
@@ -194,9 +194,10 @@ function ClientList(props) {
         Client list
       </h1>
       <Button type="primary" onClick={() => navigate("/add/client")}>
-        Add Client
+        Add a Client
       </Button>
-      <br /><br />
+      <br />
+      <br />
       <Table
         onRow={(record) => {
           return {
