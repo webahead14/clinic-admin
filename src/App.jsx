@@ -20,6 +20,7 @@ import AddClient from "./pages/AddClient";
 import AddProtocol from "./pages/AddProtocol";
 import ClientPage from "./pages/ClientPage";
 import ProtocolPage from "./pages/ProtocolPage";
+import logo from "./logowide.png";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -57,6 +58,9 @@ function App() {
             Clinic admin
           </h2>
         </div>
+        <div className="logo">
+          <img src={logo} alt="GrayMatters HealthLogo" width="50px" />
+        </div>
         {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
         <Menu.Item key="1">Tab 1</Menu.Item>
         <Menu.Item key="2">Tab 2</Menu.Item>
@@ -81,21 +85,21 @@ function App() {
               icon={<TeamOutlined />}
               style={{ marginTop: 0 }}
             >
-              Client list
+              Client List
             </Menu.Item>
             <Menu.Item
               key="3"
               onClick={() => navigate("/protocols")}
               icon={<ApartmentOutlined />}
             >
-              Protocol list
+              Protocol List
             </Menu.Item>
             <Menu.Item
               key="4"
               onClick={() => navigate("/surveys")}
               icon={<FileOutlined />}
             >
-              Survey list
+              Survey List
             </Menu.Item>
           </Menu>
         </Sider>

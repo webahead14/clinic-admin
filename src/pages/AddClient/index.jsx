@@ -70,7 +70,7 @@ function AddClient(props) {
         onFinish={() => {
           postClient(data)
             .then((tr) => {
-              showMessage("client added", "success");
+              showMessage("Client added", "Success");
               navigate("/clients");
             })
             .catch((error) => {
