@@ -34,3 +34,7 @@ export function postClient(data) {
     return axios.post(`${REACT_APP_API_URL}/api/client/register`, data);
   }
 }
+
+export function addSurvey(survey) {
+  return axios.post(`${REACT_APP_API_URL}/api/clinic/survey/add`, survey);
+}

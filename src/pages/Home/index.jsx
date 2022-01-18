@@ -31,20 +31,20 @@ function Home(props) {
     <div>
       <div style={{ height: "28vh" }}>
         <div style={{ textAlign: "center", fontSize: 30, paddingBottom: 20 }}>
-          <h>Line Chart</h>
+          <h1>Line Chart</h1>
         </div>
         <Line {...config} />
       </div>
       <div style={{ display: "flex" }}>
         <div style={{ width: "40vw", height: "40vh", padding: 100 }}>
           <div style={{ textAlign: "center", fontSize: 30 }}>
-            <h>Pie Chart</h>
+            <h1>Pie Chart</h1>
           </div>
           <DemoPie />{" "}
         </div>
         <div style={{ width: "40vw", height: "40vh", padding: 100 }}>
           <div style={{ textAlign: "center", fontSize: 30, paddingBottom: 20 }}>
-            <h>Bar Chart</h>
+            <h1>Bar Chart</h1>
           </div>
           <DemoBar />
         </div>
