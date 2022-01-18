@@ -96,7 +96,7 @@ function AddProtocol(props) {
           {/* Select options from filter. They're the same as the ones in the AutoComplete in the collapse panels. */}
           <Select
             defaultValue="Filter Survey"
-            style={{ width: 120 }}
+            style={{ width: 130 }}
             //When the filter field changes, the handleChange function modifies the weeks below
             onChange={handleChange}
             allowClear
@@ -168,7 +168,7 @@ function AddProtocol(props) {
               {/* adds the delete button to the last week added - only.  */}
               {index === addWeek.length - 1 ? (
                 <Button
-                  type="secondary"
+                  type="primary"
                   className={style.deleteWeek}
                   //onClick returns the length of addWeek and returns it without the last week
                   onClick={() => {

@@ -67,7 +67,6 @@ function AddClient(props) {
           showMessage("Failed to submit", "error");
         }}
         initialValues={data}
-
         onFinish={() => {
           postClient(data)
             .then((tr) => {
@@ -101,10 +100,10 @@ function AddClient(props) {
           <Input />
         </Form.Item>
         <Form.Item
-          label="Government Id"
+          label="Government ID"
           name="GovId"
           onChange={(e) => setData({ ...data, govId: e.target.value })}
-          rules={[{ required: true, message: "Please enter a name" }]}
+          rules={[{ required: true, message: "Please enter a valid ID" }]}
         >
           <Input />
         </Form.Item>
@@ -121,7 +120,7 @@ function AddClient(props) {
           label="Passcode"
           name="password"
           onChange={(e) => setData({ ...data, passcode: e.target.value })}
-          rules={[{ required: true, message: "Please choose a password!" }]}
+          rules={[{ required: true, message: "Please enter a password" }]}
         >
           <Input.Password />
         </Form.Item>
@@ -130,9 +129,11 @@ function AddClient(props) {
           name="Phone"
           label="Phone Number"
           onChange={(e) => setData({ ...data, phone: e.target.value })}
-          rules={[{ required: true, message: "Please insert a phone number!" }]}
+          rules={[{ required: true, message: "Please enter a phone number" }]}
         >
-          <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
+          <Input style={{ width: "100%" }} />
+          {/* Phone # input with country code */}
+          {/* <Input addonBefore={prefixSelector} style={{ width: "100%" }} /> */}
         </Form.Item>
 
         <Form.Item
@@ -148,7 +149,7 @@ function AddClient(props) {
         <Form.Item
           name="gender"
           label="Gender"
-          rules={[{ required: true, message: "Please select a gender!" }]}
+          rules={[{ required: true, message: "Please select a gender" }]}
         >
           <Radio.Group
             name="radiogroup"
@@ -173,7 +174,7 @@ function AddClient(props) {
         <Form.Item
           name="startDate"
           label="Start Date"
-          rules={[{ required: true, message: "Please choose a date!" }]}
+          rules={[{ required: true, message: "Please choose a date" }]}
         >
           <DatePicker
             onChange={(e, dateString) =>
@@ -182,11 +183,12 @@ function AddClient(props) {
           />
         </Form.Item>
 
-        <Form.Item name="protocol" label="Choose a protocol">
+        <Form.Item name="protocol" label="Protocol">
           <Complete
+            style={{ width: 250 }}
             updateData={setData}
             currentData={data}
-            rules={[{ required: true, message: "Please choose a protocol!" }]}
+            rules={[{ required: true, message: "Please choose a protocol" }]}
           />
         </Form.Item>
 
@@ -215,8 +217,12 @@ function AddClient(props) {
         </Form.Item>
         <br />
         <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Add
+          <Button
+            className={style.addClientBtn}
+            type="primary"
+            htmlType="submit"
+          >
+            Add Client
           </Button>
         </Form.Item>
       </Form>

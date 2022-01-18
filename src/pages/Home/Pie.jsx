@@ -9,7 +9,7 @@ const DemoPie = () => {
       value: 27,
     },
     {
-      type: "ADD",
+      type: "Anxiety",
       value: 25,
     },
     {
@@ -17,15 +17,15 @@ const DemoPie = () => {
       value: 18,
     },
     {
-      type: "WEIRDO",
+      type: "Depression",
       value: 15,
     },
     {
-      type: "BET-HOON",
+      type: "Schizophrenia",
       value: 10,
     },
     {
-      type: "IT'S OKAY",
+      type: "OCD",
       value: 5,
     },
   ];

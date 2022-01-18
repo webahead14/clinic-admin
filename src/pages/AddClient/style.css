@@ -5,23 +5,23 @@
   justify-content: center;
   border-radius: 25px;
   padding: 35px !important;
-  padding-left: 50px !important;
+  padding-left: 40px !important;
   padding-right: 20px !important;
 }
 
 .ant-form-item-label > label {
-  width: 165px;
-  font-size: 20px !important;
+  width: 150px;
+  font-size: 15px !important;
 }
 
 .ant-picker-input > input {
-  font-size: 20px !important;
+  font-size: 15px !important;
   width: 100px !important;
 }
 
 .ant-input {
-  width: 400px !important;
-  font-size: 20px !important;
+  width: 280px !important;
+  font-size: 15px !important;
 }
 
 .ant-input-affix-wrapper {
@@ -34,9 +34,10 @@
 }
 
 .ant-select-selector {
-  width: 209px !important;
-  font-size: 20px !important;
-  height: 40px !important;
+  align-items: center !important;
+  font-size: 15px !important;
+  height: 35px !important;
+
   padding: 4px 11px 4px !important;
 }
 
@@ -49,14 +50,14 @@
 }
 
 .ant-form label {
-  font-size: 19px !important;
+  font-size: 17px !important;
 }
 
 .ant-picker {
-  width: 198px !important;
+  width: 118px !important;
 }
 
-.ant-btn-sm {
-  font-size: 12px !important;
+/* .ant-btn-sm {
+  font-size: 15px !important;
   margin-top: 6px;
-}
+} */
