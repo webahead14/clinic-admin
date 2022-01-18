@@ -47,7 +47,12 @@ function SurveyList() {
   return (
     <div className={style.surveyList}>
       <h1 className={style.title}>Survey List</h1>
-      <Table dataSource={surveyList} columns={columns} />
+      <Button type="primary" onClick={() => navigate("/add/survey")}>
+        Add Survey
+      </Button>
+      <br />
+      <br />
+      <Table dataSource={surveyList} columns={columns} />;
     </div>
   );
 }
