@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./style.module.css";
+// import style from "./style.module.css";
 import DemoBar from "./Bar";
 import { Line } from "@ant-design/charts";
 import DemoPie from "./Pie";

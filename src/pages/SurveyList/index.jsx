@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const columns = [
   {
-    title: "id",
+    title: "ID",
     dataIndex: "id",
     key: "id",
   },
@@ -17,12 +17,12 @@ const columns = [
     key: "name",
   },
   {
-    title: "questionsAmount",
+    title: "Number of Questions",
     dataIndex: "questionsAmount",
     key: "questionsAmount",
   },
   {
-    title: "date",
+    title: "Date",
     dataIndex: "date",
     key: "date",
   },
@@ -47,12 +47,7 @@ function SurveyList() {
   return (
     <div className={style.surveyList}>
       <h1 className={style.title}>Survey List</h1>
-      <div style={{ paddingBottom: 10 }}>
-        <Button type="primary" onClick={() => navigate("/add/survey")}>
-          Add Survey
-        </Button>
-      </div>
-      <Table dataSource={surveyList} columns={columns} />;
+      <Table dataSource={surveyList} columns={columns} />
     </div>
   );
 }

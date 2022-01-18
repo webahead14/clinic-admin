@@ -9,3 +9,9 @@
 .ant-btn-secondary {
   margin-right: 10px;
 }
+
+/* add button span */
+.ant-btn > span {
+  display: inline-block;
+  margin: -10px;
+}
