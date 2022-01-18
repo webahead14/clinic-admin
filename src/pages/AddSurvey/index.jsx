@@ -24,7 +24,9 @@ function AddSurvey() {
           showMessage(res.data, "success");
           navigate("/surveys");
         })
-        .catch((err) => showMessage(err.response.data.message, "error"));
+        .catch((err) => {
+          showMessage(err.response.data.message, "error");
+        });
     }
   }, [data]);
 
