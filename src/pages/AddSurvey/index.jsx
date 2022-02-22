@@ -6,6 +6,7 @@ import { showMessage, deleteItemByIndex } from "../../utils/functions";
 import { addSurvey } from "../../utils/api";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import React, { Component }  from 'react';
 
 const { Option } = Select;
 const { TextArea } = Input;

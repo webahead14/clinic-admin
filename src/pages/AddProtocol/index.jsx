@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Complete from "../../components/Complete";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import React, { Component }  from 'react';
 
 const { REACT_APP_API_URL } = process.env;
 

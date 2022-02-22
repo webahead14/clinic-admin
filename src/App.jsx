@@ -22,6 +22,7 @@ import AddSurvey from "./pages/AddSurvey";
 import ClientPage from "./pages/ClientPage";
 import ProtocolPage from "./pages/ProtocolPage";
 import logo from "./logowide.png";
+import React, { Component }  from 'react';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
