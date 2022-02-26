@@ -3,10 +3,6 @@ import "antd/dist/antd.css";
 import "./styleModule.css";
 import { Button, DatePicker,TimePicker, Form, Input, Radio, Select, Space } from "antd";
 import { Option } from "antd/lib/mentions";
-// REMOVE THIS LINE OF CODE, IT'S  JUST FOR SHOWING THE /add/client PAGE
-//export default () => 'add client page';
-
-// WRITE YOUR CODE BELOW THIS LINE
 
 const AddClient = () => {
   const [client, setClient] = useState({
@@ -41,6 +37,13 @@ const AddClient = () => {
   const logClient = () => {
     console.log(client);
   };
+  const fetchClient = () => {
+    fetch('https://wa14-clinic-api.herokuapp.com/api/client/register',{ method: 'POST',
+  body: JSON.stringify({client})
+})
+  console.log('Fetched Client')
+  logClient()
+  }
 
   return (
     <div>
@@ -116,8 +119,8 @@ const AddClient = () => {
           <TimePicker format='hh:mm' onChange={reminderChange}/>
         </Space>
       </Form.Item>
-      <Form.Item>
-      <Button style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}} onClick={logClient}>Add Client</Button>
+      <Form.Item labelAlign="center">
+      <Button  type='primary' htmlType='submit' onClick={fetchClient}>Add Client</Button>
       </Form.Item>
       <Form.Item></Form.Item>
     </Form>
