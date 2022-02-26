@@ -1,0 +1,25 @@
+.centered {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    height: 3vh;
+    font-style: bold;
+    font-size: large;
+    
+}
+
+.buttonStyle {
+    background-color: blue;
+    color: white;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formStyle {
+    background-color: white;
+    border-radius: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
