@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "./styleModule.css";
-import { Button, DatePicker,TimePicker, Form, Input, Radio, Select, Space } from "antd";
+import { Button, DatePicker,TimePicker, Form, Input, Radio, Select, Space} from "antd";
 import { Option } from "antd/lib/mentions";
 
 const AddClient = () => {
@@ -15,7 +15,7 @@ const AddClient = () => {
     gender: "",
     protocolId: "",
     startDate: "",
-    reminders: ["12:00", "08:30", "15:10"],
+    reminders: [],
   });
 
   const handleChange = (e) => {
@@ -27,22 +27,48 @@ const AddClient = () => {
   };
   
   const dateChange = (date) => {
-    client.startDate = date
-  }
-
-  const reminderChange = e => {
-    console.log('reminder: '+ e.target.value)
+    client.startDate = date.format("YYYY-MM-DD")
   }
 
   const logClient = () => {
     console.log(client);
   };
+  // const fetchClient = () => {
+  //   fetch("https://wa14-clinic-api.herokuapp.com/api/client/register", {
+  //     method: "POST",
+  //     body: JSON.stringify({ client }),
+  //   });
+  //   console.log("Fetched Client");
+  //   logClient();
+  // };
   const fetchClient = () => {
-    fetch('https://wa14-clinic-api.herokuapp.com/api/client/register',{ method: 'POST',
-  body: JSON.stringify({client})
-})
-  console.log('Fetched Client')
-  logClient()
+    fetch('https://wa14-clinic-api.herokuapp.com/api/client/register', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: client.name,
+        passcode: client.passcode,
+        govId: client.govId,
+        condition: client.condition,
+        phone: client.phone,
+        email: client.email,
+        gender: client.gender,
+        protocolId: client.protocolId,
+        startDate: client.startDate,
+        reminders: client.reminders,
+      })
+    })
+    logClient()
+  }
+  const handleProtocolChange = selected => {
+    client.protocolId = selected
+  }
+
+  const handleReminder = time => {
+    client.reminders.push(time.format("hh:mm"))
   }
 
   return (
@@ -100,26 +126,25 @@ const AddClient = () => {
       <Select
           dropdownMatchSelectWidth="fit-content"
           name='protocolId'
-          onChange={handleChange}
-          value={client.protocolId}
+          onChange={handleProtocolChange}
           placeholder='Select a protocol'
         >
-          <Select.Option value="protocol 1">
+          <Select.Option value="protocol1">
             protocol 1
           </Select.Option>
-          <Select.Option value="protocol 2">
+          <Select.Option value="protocol2">
             protocol 2
           </Select.Option>
         </Select>
       </Form.Item>
       <Form.Item label='Reminder:' name='reminders'>
         <Space direction='horizental'>
-          <TimePicker format='hh:mm' onChange={reminderChange}/>
-          <TimePicker format='hh:mm' onChange={reminderChange}/>
-          <TimePicker format='hh:mm' onChange={reminderChange}/>
+          <TimePicker name='reminders' format='hh:mm' onChange={handleReminder} />
+          <TimePicker name='reminders' format='hh:mm' onChange={handleReminder} />
+          <TimePicker name='reminders' format='hh:mm' onChange={handleReminder} />
         </Space>
       </Form.Item>
-      <Form.Item labelAlign="center">
+      <Form.Item className="buttonStyle" wrapperCol={18}>
       <Button  type='primary' htmlType='submit' onClick={fetchClient}>Add Client</Button>
       </Form.Item>
       <Form.Item></Form.Item>
