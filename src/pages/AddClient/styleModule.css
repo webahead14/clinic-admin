@@ -8,12 +8,13 @@
     
 }
 
-.buttonStyle {
-    border-radius: 3px;
+.buttonStyle{
     display: flex;
     justify-content: center;
     align-items: center;
-}
+    margin-left: 250px;
+    background-color: transparent;
+ }
 
 .formStyle {
     background-color: white;
