@@ -5,6 +5,7 @@ import { Button, DatePicker,TimePicker, Form, Input, Radio, Select, Space} from 
 import { Option } from "antd/lib/mentions";
 
 const AddClient = () => {
+  const [form] = Form.useForm()
   const [client, setClient] = useState({
     name: "",
     passcode: "",
@@ -17,6 +18,7 @@ const AddClient = () => {
     startDate: "",
     reminders: [],
   });
+  const genders = ["Male", "Female", "Other"]
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,13 +36,19 @@ const AddClient = () => {
     console.log(client);
   };
   
-  const fetchClient = (data) => {
-    fetch('https://wa14-clinic-api.herokuapp.com/api/client/register', {
+  const fetchClient = () => {
+    console.log('client added ',client)
+    form.validateFields().then((client) => {
+      fetch('https://wa14-clinic-api.herokuapp.com/api/client/register', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(data)
+    headers: {'Content-Type': 'application/json', 'append':'application/json'},
+    body: [JSON.stringify(client.name), JSON.stringify(client.passcode),
+      JSON.stringify(client.govId), JSON.stringify(client.condition),
+      JSON.stringify(client.phone), JSON.stringify(client.email),
+      JSON.stringify(client.gender), JSON.stringify(client.protocolId),
+      JSON.stringify(client.startDate), JSON.stringify(client.reminders)]
+    }).catch((console.error()))
   })
-  console.log(data)
   }
   const handleProtocolChange = selected => {
     client.protocolId = selected
@@ -54,7 +62,8 @@ const AddClient = () => {
     <div>
       <span className="centered">Add a Client</span>
     <Form labelCol={{ span: 7}}
-    wrapperCol={{ span: 15 }} className='formStyle' layout="horizental">
+    wrapperCol={{ span: 15 }} className='formStyle' layout="horizental"
+    form={form} >
       <Form.Item></Form.Item>
       <Form.Item label='Name:    ' name='name'
       rules={[{required: true}]}>
@@ -91,9 +100,7 @@ const AddClient = () => {
           value={client.gender}
         >
           <Space direction="horizental">
-            <Radio value="Male">Male</Radio>
-            <Radio value="Female">Female</Radio>
-            <Radio value="Other">Other</Radio>
+            {genders.map((ans,index)=> <Radio value={index}>{ans}</Radio>)}
           </Space>
         </Radio.Group>
       </Form.Item>
@@ -124,7 +131,7 @@ const AddClient = () => {
         </Space>
       </Form.Item>
        <Form.Item className="buttonStyle" wrapperCol={{offset: 6, span: 6}}>
-      <Button type='primary' htmlType='submit' onClick={fetchClient(client)}>Add Client</Button>
+        <Button type='primary' htmlType='submit' onClick={fetchClient}>Add Client</Button>
       </Form.Item>
     </Form>
     </div>
