@@ -26,7 +26,7 @@ const AddClient = () => {
     gender: "",
     protocolId: "",
     startDate: "",
-    reminders: ["", "", ""],
+    reminders: ['','',''],
   });
   const genders = ["Male", "Female", "Other"];
 
@@ -47,14 +47,15 @@ const AddClient = () => {
   const handleProtocolChange = (selected) => {
     setClient((prevState) => ({
       ...prevState,
-      protocolId: selected,
+      protocolId: selected
     }));
   };
   const handleReminderChange = (index) => (selected) => {
     setClient((prevState) => ({
       ...prevState,
-      reminders: [client.reminders[index], selected],
-    }));
+    })
+    );
+    client.reminders[index] = selected
   };
 
   const handleSubmit = () => {
