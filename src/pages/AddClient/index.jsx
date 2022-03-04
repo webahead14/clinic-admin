@@ -38,11 +38,17 @@ const AddClient = () => {
     }));
   };
   const handleDateChange = (selected) => {
-    client.startDate = selected;
+    setClient((prevState) => ({
+      ...prevState,
+      startDate: selected,
+    }));
   };
 
   const handleProtocolChange = (selected) => {
-    client.protocolId = selected;
+    setClient((prevState) => ({
+      ...prevState,
+      protocolId: selected,
+    }));
   };
   const handleReminderChange = (index) => (selected) => {
     setClient((prevState) => ({
