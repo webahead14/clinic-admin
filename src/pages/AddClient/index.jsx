@@ -44,8 +44,11 @@ const AddClient = () => {
   const handleProtocolChange = (selected) => {
     client.protocolId = selected;
   };
-  const handleReminderChange = (index) => (e) => {
-    client.reminders[index] = e;
+  const handleReminderChange = (index) => (selected) => {
+    setClient((prevState) => ({
+      ...prevState,
+      reminders: [client.reminders[index], selected],
+    }));
   };
 
   const handleSubmit = () => {
