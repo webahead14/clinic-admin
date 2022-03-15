@@ -1,0 +1,18 @@
+ .fields{
+   padding-left: 40%;
+  }  
+
+
+.SubButton{
+    position: relative;
+    bottom: -20px; 
+    padding-left: 45%;
+}
+.numInput{
+    width: 75px;
+}
+.howInput{
+    height: 60px;
+    width: 250px;
+}
+

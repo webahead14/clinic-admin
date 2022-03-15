@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 
 import Login from "./pages/Login";
+import Marketing from "./pages/Marketing/Marketing";
 import Home from "./pages/Home";
 import ClientList from "./pages/ClientList";
 import ProtocolList from "./pages/ProtocolList";
@@ -116,6 +117,8 @@ function App() {
               <Route path="/add/client" element={<AddClient />} />
               <Route path="/client/:id" element={<ClientPage />} />
               <Route path="/protocol/:id" element={<ProtocolPage />} />
+              <Route path="/Marketing" element={<Marketing />} />
+
             </Routes>
           </div>
         </Content>
