@@ -14,7 +14,6 @@ function SurveyList(props) {
     axios
       .get("https://wa14-clinic-api.herokuapp.com/api/clinic/surveys")
       .then((response) => {
-        console.log(response.data);
         tableData = response.data.surveys;
         setData(tableData);
       });

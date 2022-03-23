@@ -9,6 +9,7 @@ import {
   FileOutlined,
   UserOutlined,
   FundOutlined,
+  CalendarOutlined,
 } from "@ant-design/icons";
 
 import Login from "./pages/Login";
@@ -22,6 +23,8 @@ import AddSurvey from "./pages/AddSurvey";
 import ClientPage from "./pages/ClientPage";
 import ProtocolPage from "./pages/ProtocolPage";
 import logo from "./logowide.png";
+import Appointments from "./pages/Appointments";
+import AddAppointment from "./pages/AddAppoinment";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -102,6 +105,27 @@ function App() {
             >
               Survey List
             </Menu.Item>
+
+            <SubMenu
+              key="sub1"
+              icon={<CalendarOutlined />}
+              title="Appointments"
+            >
+              <Menu.Item
+                key="5"
+                onClick={() => navigate("/Appointments")}
+                icon={<CalendarOutlined />}
+              >
+                All Appointments
+              </Menu.Item>
+              <Menu.Item
+                key="6"
+                onClick={() => navigate("/add/Appointment")}
+                icon={<CalendarOutlined />}
+              >
+                Add Appointment
+              </Menu.Item>
+            </SubMenu>
           </Menu>
         </Sider>
         <Content style={{ margin: "0 16px" }}>
@@ -116,6 +140,8 @@ function App() {
               <Route path="/add/client" element={<AddClient />} />
               <Route path="/client/:id" element={<ClientPage />} />
               <Route path="/protocol/:id" element={<ProtocolPage />} />
+              <Route path="/Appointments" element={<Appointments />} />
+              <Route path="/add/Appointment" element={<AddAppointment />} />
             </Routes>
           </div>
         </Content>
