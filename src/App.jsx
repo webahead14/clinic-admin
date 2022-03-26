@@ -9,6 +9,7 @@ import {
   FileOutlined,
   UserOutlined,
   FundOutlined,
+  EditOutlined,
 } from "@ant-design/icons";
 
 import Login from "./pages/Login";
@@ -23,6 +24,7 @@ import AddSurvey from "./pages/AddSurvey";
 import ClientPage from "./pages/ClientPage";
 import ProtocolPage from "./pages/ProtocolPage";
 import logo from "./logowide.png";
+import AddNurse from "./pages/AddNurse/index";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -103,6 +105,13 @@ function App() {
             >
               Survey List
             </Menu.Item>
+            <Menu.Item
+              key="5"
+              onClick={() => navigate("/AddNurse")}
+              icon={<EditOutlined />}
+            >
+              Survey List
+            </Menu.Item>
           </Menu>
         </Sider>
         <Content style={{ margin: "0 16px" }}>
@@ -118,7 +127,7 @@ function App() {
               <Route path="/client/:id" element={<ClientPage />} />
               <Route path="/protocol/:id" element={<ProtocolPage />} />
               <Route path="/Marketing" element={<Marketing />} />
-
+              <Route path="/AddNurse" element={<AddNurse />} />
             </Routes>
           </div>
         </Content>
